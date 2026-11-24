@@ -16,6 +16,8 @@ export const now = () => new Date().toISOString();
 export const containsCI = (col: string, term: string) =>
   sql<boolean>`lower(${sql.ref(col)}) like ${'%' + term.toLowerCase() + '%'}`;
 
+// Cambiar la llave cuando cambien los datos iniciales (cada navegador arranca de nuevo).
+const LLAVE = 'db-v2-playas';
 let raw: Database | null = null;
 const fix = (ps: readonly unknown[]) => ps.map(p => (typeof p === 'boolean' ? (p ? 1 : 0) : p === undefined ? null : p)) as never[];
 
@@ -47,7 +49,7 @@ let listo: Promise<void> | null = null;
 export function iniciar(wasmUrl: string, sembrar: (k: Kysely<DB>) => Promise<void>) {
   return (listo ??= (async () => {
     const SQL = await initSqlJs({ locateFile: () => wasmUrl });
-    const guardada = await kvGet<Uint8Array>('db');
+    const guardada = await kvGet<Uint8Array>(LLAVE);
     raw = guardada ? new SQL.Database(guardada) : new SQL.Database();
     raw.run('PRAGMA foreign_keys = ON');
     const m = new Migrator({ db, provider: { getMigrations: async () => migrationsFor(false) } });
@@ -57,9 +59,9 @@ export function iniciar(wasmUrl: string, sembrar: (k: Kysely<DB>) => Promise<voi
     await guardar();
   })());
 }
-export async function guardar() { if (raw) await kvSet('db', raw.export()); }
+export async function guardar() { if (raw) await kvSet(LLAVE, raw.export()); }
 /** Borra todo y vuelve a crear los datos de ejemplo. */
-export async function reiniciar() { await kvSet('db', null as unknown as Uint8Array); raw = null; listo = null; }
+export async function reiniciar() { await kvSet(LLAVE, null as unknown as Uint8Array); raw = null; listo = null; }
 
 export const db = new Kysely<DB>({
   dialect: new SqliteDialect({ database: async () => { if (!raw) throw new Error('Base demo no iniciada'); return adaptador(raw) as never; } }),

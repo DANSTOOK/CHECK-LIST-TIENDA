@@ -30,7 +30,8 @@ async function main() {
     }
     if (cmd === 'seed' || cmd === 'setup') await (await import('./seed')).seed(db);
     if (cmd === 'demo') await (await import('./demo')).demo(db);
-    if (!['migrate', 'setup', 'seed', 'demo'].includes(cmd)) console.log('Uso: tsx db/cli.ts setup|migrate|seed|demo');
+    if (cmd === 'tiendas') await (await import('./tiendas')).cargarTiendas(db);
+    if (!['migrate', 'setup', 'seed', 'demo', 'tiendas'].includes(cmd)) console.log('Uso: tsx db/cli.ts setup|migrate|seed|demo');
   } finally {
     await db.destroy();
   }

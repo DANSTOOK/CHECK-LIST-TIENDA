@@ -9,7 +9,7 @@
 import { iniciar, guardar, reiniciar } from './db';
 import { cargarCookies } from './headers';
 import { seed } from '../../db/seed';
-import { demo } from '../../db/demo';
+import { cargarTiendas } from '../../db/tiendas';
 import { fail } from '@/lib/api';
 
 import * as sesion from '@/app/api/sesion/route';
@@ -84,7 +84,7 @@ const VISTAS: Record<string, (q: URLSearchParams) => Promise<unknown>> = {
   'admin-usuarios': () => loadAdminUsuarios(),
 };
 
-const arrancar = () => Promise.all([iniciar(`${BASE}/sql-wasm.wasm`, async k => { await seed(k); await demo(k); }), cargarCookies()]);
+const arrancar = () => Promise.all([iniciar(`${BASE}/sql-wasm.wasm`, async k => { await seed(k); await cargarTiendas(k); }), cargarCookies()]);
 
 async function atender(req: Request, path: string, query: URLSearchParams): Promise<Response> {
   await arrancar();

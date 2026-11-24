@@ -14,7 +14,7 @@ Cada push a `main` publica una versión **demo** en GitHub Pages (`.github/workf
 **https://danstook.github.io/CHECK-LIST-TIENDA/**
 
 - Es la misma app, compilada como sitio estático (`npm run build:demo`). Como Pages no ejecuta servidor, la API, la base de datos (SQLite en WebAssembly), las fotos y el PDF corren **dentro del navegador** en un *service worker* (`src/demo/sw.ts`), con los mismos route handlers y consultas que el servidor.
-- Los datos se guardan **solo en el navegador de cada persona** (IndexedDB): cada quien ve sus propias pruebas. Empieza con el checklist de 5 preguntas y 6 tiendas de ejemplo (`Oxxo 001` a `Oxxo 006`) con 6 meses de evaluaciones de ejemplo. El concentrado real de tiendas **no** se publica.
+- Los datos se guardan **solo en el navegador de cada persona** (IndexedDB): cada quien ve sus propias pruebas. Empieza con el checklist de 5 preguntas y el catálogo de tiendas de `db/tiendas-region.json` (hoy: las 247 tiendas de **Plaza Playas** con su RO). Ese archivo es público junto con el repositorio.
 - Funciona igual en el celular (cámara incluida). El correo se genera como `.eml` para Outlook Desktop; el borrador con Microsoft Graph solo existe en la versión con servidor.
 - Probar localmente antes de publicar:
   ```bash
@@ -130,6 +130,7 @@ Colocar el logo oficial autorizado en `public/img/logo.png` (o `.jpg`). Si no ex
 | `npm run setup` | Migraciones + checklist inicial |
 | `npm run db:migrate` | Solo migraciones |
 | `npm run db:seed` | Checklist, categorías y preguntas iniciales (no duplica) |
+| `npm run db:tiendas` | Carga/actualiza el catálogo de `db/tiendas-region.json` |
 | `npm run db:demo` | Datos de demostración (`-- --clear` para quitarlos) |
 | `npm run typecheck` | Revisión de tipos TypeScript |
 | `npm run build:demo` | Versión demo estática para GitHub Pages (en `out/`) |

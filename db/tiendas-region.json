@@ -1,0 +1,2225 @@
+[
+ {
+  "cr": "503KA",
+  "nombre": "1ro De Mayo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50REP",
+  "nombre": "ARIAS TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50ZDP",
+  "nombre": "Abelardo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50BYO",
+  "nombre": "Abeto TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50KXK",
+  "nombre": "Abraham Gonzalez TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "506C4",
+  "nombre": "Adela TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "507TZ",
+  "nombre": "Agata TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50TF1",
+  "nombre": "Agrarios TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50QYK",
+  "nombre": "Agua Azul TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50YGY",
+  "nombre": "Aguayo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "507VR",
+  "nombre": "Alacran TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "5054M",
+  "nombre": "Albino TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50FUO",
+  "nombre": "Alcala TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50JFQ",
+  "nombre": "Alfa TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50VNS",
+  "nombre": "Alfarero TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50ZJJ",
+  "nombre": "Allende TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "501HY",
+  "nombre": "Alondras TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50OTO",
+  "nombre": "Altos II TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50180",
+  "nombre": "Amatista TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50DP0",
+  "nombre": "Argentina TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50DE7",
+  "nombre": "Avenida G TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50WJC",
+  "nombre": "Avenida TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50XO3",
+  "nombre": "BBS",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50GSB",
+  "nombre": "Balarezo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50LDY",
+  "nombre": "Baltico TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "509CZ",
+  "nombre": "Barcelona TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50TVJ",
+  "nombre": "Benito Juarez TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50KUK",
+  "nombre": "Botanero TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50GWT",
+  "nombre": "Bracamontes TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50JCW",
+  "nombre": "Bravo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50Q5B",
+  "nombre": "CHUCHUMA",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50KHO",
+  "nombre": "Cacho TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50WPE",
+  "nombre": "Calafia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50KRF",
+  "nombre": "Cantu TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50CWS",
+  "nombre": "Caoba II TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50CGA",
+  "nombre": "Careaga TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50QWB",
+  "nombre": "Castillo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50XKF",
+  "nombre": "Catalina TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50UYD",
+  "nombre": "Catedral TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50ZXF",
+  "nombre": "Centro TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50T7N",
+  "nombre": "Chapala TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50CV3",
+  "nombre": "Chaparral TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "509H9",
+  "nombre": "Chapingo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50P69",
+  "nombre": "Chiapas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50AKO",
+  "nombre": "Chihuahua TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "506VD",
+  "nombre": "Colinas De California TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "5077B",
+  "nombre": "Columbus TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50GMO",
+  "nombre": "Constitucion TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50RON",
+  "nombre": "Coronado TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50OUJ",
+  "nombre": "Cortijo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50T3Q",
+  "nombre": "Cosmopolitan TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50COS",
+  "nombre": "Costa Azul TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50KZQ",
+  "nombre": "Costa Dorada TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50OCH",
+  "nombre": "Costa Hermosa TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50L6M",
+  "nombre": "Costa Rica TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50PO8",
+  "nombre": "Coto TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50QFX",
+  "nombre": "Cuarzo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "507W5",
+  "nombre": "Culiacan",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50RES",
+  "nombre": "Cumbres TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50XZK",
+  "nombre": "Cuspide TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50DZA",
+  "nombre": "Decima TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50GEL",
+  "nombre": "Del Angel TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50ODR",
+  "nombre": "Del Rocio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50EOG",
+  "nombre": "Diego Rivera TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50DZN",
+  "nombre": "Duran TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50D78",
+  "nombre": "Easy Park TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50YAQ",
+  "nombre": "El Descanso TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50HNB",
+  "nombre": "El Mirador TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50R8B",
+  "nombre": "El Pato TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50LKK",
+  "nombre": "El Rosario TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50ENS",
+  "nombre": "Ensenada TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50ODY",
+  "nombre": "Escondida TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "500A4",
+  "nombre": "Escutia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50SHD",
+  "nombre": "Estela TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50C47",
+  "nombre": "Eucalipto TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50HFD",
+  "nombre": "Fe TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "5074F",
+  "nombre": "Fierro TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50RLR",
+  "nombre": "Florencia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50L9M",
+  "nombre": "Flores Magon TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50OFV",
+  "nombre": "Francisco Villa TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50FXT",
+  "nombre": "Frontera TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50ZXI",
+  "nombre": "Fronterizo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50XGF",
+  "nombre": "Fundadores I TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50XFE",
+  "nombre": "Fundadores II TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50Y89",
+  "nombre": "Gaviotas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50NWG",
+  "nombre": "Gayosso TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "509R5",
+  "nombre": "Gonzalez TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50AKP",
+  "nombre": "Gorman TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50OQY",
+  "nombre": "Grijalva TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50XUS",
+  "nombre": "Guadalajara TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50TVC",
+  "nombre": "Guillen TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50X0S",
+  "nombre": "HELSINKI TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50A1N",
+  "nombre": "Hacienda Laureles TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50D42",
+  "nombre": "Heraclio Bernal TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50WIH",
+  "nombre": "Heroes TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50ZXR",
+  "nombre": "Herradura TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50WHE",
+  "nombre": "Herrera TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50DAL",
+  "nombre": "Hidalgo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50XZW",
+  "nombre": "IFE TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50QEG",
+  "nombre": "IMSS TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50IXP",
+  "nombre": "Independencia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "504X9",
+  "nombre": "Integridad TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50V89",
+  "nombre": "Iris TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50JYK",
+  "nombre": "Isla TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "505LA",
+  "nombre": "Ixtlan TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50JCD",
+  "nombre": "Jacaranda TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50JAN",
+  "nombre": "Jardin TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50JQA",
+  "nombre": "Jazmines TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50JBT",
+  "nombre": "Jibarito TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50174",
+  "nombre": "Juanacatlan TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "509AF",
+  "nombre": "Jupiter TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50M3H",
+  "nombre": "Kukulcan",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50GLI",
+  "nombre": "La Gloria TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50YJB",
+  "nombre": "La Joya TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50HYH",
+  "nombre": "La Marque TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50KLF",
+  "nombre": "La Perla TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "5006N",
+  "nombre": "La Roque",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50XSW",
+  "nombre": "La Sierra TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "501MQ",
+  "nombre": "Laguna Verde TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50SDM",
+  "nombre": "Lagunas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "504QT",
+  "nombre": "Laja TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50BWJ",
+  "nombre": "Las Plazas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50JIL",
+  "nombre": "Las Villas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50EES",
+  "nombre": "Laureles TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50C5B",
+  "nombre": "Legislacion TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "5053D",
+  "nombre": "Lerma TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50BRA",
+  "nombre": "Libramiento TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50HOX",
+  "nombre": "Lincoln TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "5041L",
+  "nombre": "Liorna",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50LLU",
+  "nombre": "Lluvia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50JSF",
+  "nombre": "Loma Blanca TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50K34",
+  "nombre": "Londres",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50TLT",
+  "nombre": "Los Altos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "506HY",
+  "nombre": "Los Cabos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50FJX",
+  "nombre": "Lupita II TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50K1N",
+  "nombre": "MISIONEROS",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50CX8",
+  "nombre": "Magdalena TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50WVE",
+  "nombre": "Magon TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50D65",
+  "nombre": "Malibat TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50M5S",
+  "nombre": "Malinche TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50MFX",
+  "nombre": "Malof TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50IGF",
+  "nombre": "Martires TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50XAK",
+  "nombre": "Maxim TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50JWG",
+  "nombre": "Maya TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50IWT",
+  "nombre": "Mercado La Fe TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50WPF",
+  "nombre": "Mextli TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "5096M",
+  "nombre": "Milan Tij",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50QLS",
+  "nombre": "Milenio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50MIS",
+  "nombre": "Mision TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50K7H",
+  "nombre": "Mistico TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50MJG",
+  "nombre": "Montana TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50SYE",
+  "nombre": "Monterrey TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50G3D",
+  "nombre": "Montevideo",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50ZVD",
+  "nombre": "Monumental TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50WLZ",
+  "nombre": "Morelos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50MLJ",
+  "nombre": "Mulege TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50YHV",
+  "nombre": "Mutualismo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50NCY",
+  "nombre": "Nacional TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "500ZH",
+  "nombre": "Nueva York TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50JU6",
+  "nombre": "Nuevo Milenio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50TEP",
+  "nombre": "Oaxtepec TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50OBE",
+  "nombre": "Obrera TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50AMP",
+  "nombre": "Ocampo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50OQT",
+  "nombre": "Octava TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50JXM",
+  "nombre": "Olimpo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50ZVG",
+  "nombre": "Once TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50OXK",
+  "nombre": "Onix TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "509PV",
+  "nombre": "Oporto TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50O21",
+  "nombre": "PARQUE AZTECA",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "503X3",
+  "nombre": "Padilla TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50PKN",
+  "nombre": "Padre Kino TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50M3Q",
+  "nombre": "Palermo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50YJC",
+  "nombre": "Panamericano TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50JPW",
+  "nombre": "Papo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50NB1",
+  "nombre": "Parque Mexico",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50GEE",
+  "nombre": "Paseo Playas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50PED",
+  "nombre": "Pedregal TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50YUG",
+  "nombre": "Penasco TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "509GW",
+  "nombre": "Peral TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50PJH",
+  "nombre": "Picacho TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50WPN",
+  "nombre": "Planetario TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50OQL",
+  "nombre": "Plateado TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50PLY",
+  "nombre": "Playas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50OI5",
+  "nombre": "Plaza Coronado TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50ITT",
+  "nombre": "Pluvial TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "502HF",
+  "nombre": "Popocatepetl TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50FGP",
+  "nombre": "Porticos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50QYJ",
+  "nombre": "Porvenir TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50PUP",
+  "nombre": "Puente TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "504WW",
+  "nombre": "Puesta del Sol TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "5089T",
+  "nombre": "Quetzalcoatl TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50YFR",
+  "nombre": "Quinta Fe TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50OQR",
+  "nombre": "Quintana Roo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50QOF",
+  "nombre": "Quiroga TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50ZRY",
+  "nombre": "Ramos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martha Veronica Hernandez Ramirez"
+ },
+ {
+  "cr": "50TRA",
+  "nombre": "Ranchero TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50JLD",
+  "nombre": "Rayon TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50RUY",
+  "nombre": "Revolucion TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50OUO",
+  "nombre": "Robins TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50SKV",
+  "nombre": "Rocha TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50RLD",
+  "nombre": "Rosalinda TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50RIT",
+  "nombre": "Rosarito I TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50RLY",
+  "nombre": "Royal TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50XUV",
+  "nombre": "Rubi TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50ANT",
+  "nombre": "San Antonio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50YK7",
+  "nombre": "San Jose TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50L48",
+  "nombre": "San Judas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50XKL",
+  "nombre": "San Telmo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50SKT",
+  "nombre": "Santa Clara TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50G8F",
+  "nombre": "Santa Cruz TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50QXX",
+  "nombre": "Santa Fe TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50JUL",
+  "nombre": "Santa Julia TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50ZJX",
+  "nombre": "Septima TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50SVZ",
+  "nombre": "Sexta TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "501II",
+  "nombre": "Shakeaspeare",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50Q59",
+  "nombre": "Siena TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "508UZ",
+  "nombre": "Sisneagas TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50P1T",
+  "nombre": "Soler TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50O8F",
+  "nombre": "Springs TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "508IK",
+  "nombre": "Suarez TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50KWF",
+  "nombre": "TELEVISION",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50XKY",
+  "nombre": "Tamayo",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50ZVE",
+  "nombre": "Tapatio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50KTE",
+  "nombre": "Tecolote TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50LBU",
+  "nombre": "Tenoch TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50A6P",
+  "nombre": "Tizoc TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50XZN",
+  "nombre": "Tlaltizapan TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50H25",
+  "nombre": "Topacio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50C9R",
+  "nombre": "Torela",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50TTR",
+  "nombre": "Toreo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "5045W",
+  "nombre": "Toriz TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50DXS",
+  "nombre": "Transpeninsular TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ },
+ {
+  "cr": "50I1J",
+  "nombre": "Turin TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50XHU",
+  "nombre": "Turista TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "50VCK",
+  "nombre": "Vallecitos TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "502JF",
+  "nombre": "Valparaiso",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50A9C",
+  "nombre": "Verdad TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Alejandra Jazmin Juarez Parra"
+ },
+ {
+  "cr": "50VAF",
+  "nombre": "Verona TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50YJA",
+  "nombre": "Versalles TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50MAT",
+  "nombre": "Vikingo TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Erika Guadalupe Mendoza Figueroa"
+ },
+ {
+  "cr": "50VJH",
+  "nombre": "Villalta TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Juan Pablo Ortiz Rivas"
+ },
+ {
+  "cr": "50XVT",
+  "nombre": "XOCHIMILCO TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jorge Heredia Garcia"
+ },
+ {
+  "cr": "50710",
+  "nombre": "ZUMPANGO",
+  "ciudad": null,
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Julio Cesar Norzagaray Cordova"
+ },
+ {
+  "cr": "50OB6",
+  "nombre": "Zaragoza TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel Angel Barrientos Gomez"
+ },
+ {
+  "cr": "5037U",
+  "nombre": "Zarate TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Miguel de Jesus Almanza Escobar"
+ },
+ {
+  "cr": "50QZC",
+  "nombre": "Zona Norte TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Jose Adalberto Lopez Rodriguez"
+ },
+ {
+  "cr": "50ZYO",
+  "nombre": "Zona Rio TIJ",
+  "ciudad": "Tijuana",
+  "plaza": "Playas",
+  "estado": "Baja California",
+  "region": null,
+  "ro": "Martin Javier Leyva Cabanillas"
+ }
+]

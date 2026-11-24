@@ -12,7 +12,8 @@
     "db:seed": "node node_modules/tsx/dist/cli.mjs db/cli.ts seed",
     "db:demo": "node node_modules/tsx/dist/cli.mjs db/cli.ts demo",
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
-    "build:demo": "node scripts/build-demo.mjs"
+    "build:demo": "node scripts/build-demo.mjs",
+    "db:tiendas": "node node_modules/tsx/dist/cli.mjs db/cli.ts tiendas"
   },
   "dependencies": {
     "@azure/storage-blob": "12.34.0",
