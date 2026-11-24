@@ -4,7 +4,7 @@
  * 1) Elige plaza y busca la tienda por CR o nombre.  2) Revisa las preguntas.
  * 3) "Iniciar checklist" (o "Continuar" si ya tienes uno abierto en esa tienda).
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { api, Empty, Icon, PctTag, useAppRouter, useToast } from '@/components/ui';
 import { u } from '@/lib/base';
 import { fmtDate, REGLAS_EVIDENCIA } from '@/lib/format';
@@ -23,6 +23,9 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
   const [q, setQ] = useState('');
   const [sel, setSel] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // En celular las preguntas empiezan plegadas para dejar la lista de tiendas a la mano.
+  const [verPreg, setVerPreg] = useState(true);
+  useEffect(() => { if (window.matchMedia('(max-width: 860px)').matches) setVerPreg(false); }, []);
 
   const lista = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -76,7 +79,8 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
             ) : (
               <div className="pick-list" role="listbox" aria-label="Tiendas">
                 {lista.slice(0, MAX).map(t => (
-                  <button key={t.id} type="button" role="option" aria-selected={sel === t.id} className={`pick ${sel === t.id ? 'is-on' : ''}`} onClick={() => setSel(t.id)}>
+                  <button key={t.id} type="button" role="option" aria-selected={sel === t.id} className={`pick ${sel === t.id ? 'is-on' : ''}`} onClick={() => { setSel(t.id); try { navigator.vibrate?.(10); } catch { /* */ } }}>
+                    <span className="pick-check" aria-hidden="true"><Icon n="check" /></span>
                     <span className="pick-main"><b>{t.nombre}</b><span className="mono">CR {t.cr}{t.plaza ? ` · ${etiquetaPlaza(t.plaza)}` : ''}</span>{t.ro && <span className="muted">RO {t.ro}</span>}</span>
                     <span className="pick-side">
                       {t.borradorId ? <span className="state warn">En curso</span> : t.ultima ? <><PctTag value={t.ultima.porcentaje} /><span className="muted">{fmtDate(t.ultima.fecha, { day: 'numeric', month: 'short' })}</span></> : <span className="muted">Sin evaluar</span>}
@@ -89,8 +93,8 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
           </div>
         </section>
 
-        <section className="panel inicio-preg">
-          <div className="panel-head"><h2><span className="step-n">2</span>Preguntas del checklist</h2></div>
+        <details className="panel inicio-preg" open={verPreg} onToggle={e => setVerPreg((e.target as HTMLDetailsElement).open)}>
+          <summary><div className="panel-head"><h2><span className="step-n">2</span>Preguntas del checklist</h2><span className="muted">{preguntas.length}</span><Icon n="chevron" className="sum-chev" /></div></summary>
           <ol className="preg-list">
             {preguntas.map((p, i) => {
               const head = p.categoria !== cat ? (cat = p.categoria) : null;
@@ -103,7 +107,7 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
               );
             })}
           </ol>
-        </section>
+        </details>
       </div>
 
       <div className="inicio-bar">
