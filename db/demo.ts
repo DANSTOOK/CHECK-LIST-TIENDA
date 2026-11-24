@@ -46,9 +46,10 @@ export async function demo(db: Kysely<DB>) {
       const resps = preguntas.map((p, k) => {
         const r = rnd();
         const resultado = r < 0.06 ? 'no_aplica' : r < prob ? 'cumple' : 'no_cumple';
+        const calificacion = resultado === 'cumple' ? (rnd() < 0.6 ? 5 : 4) : resultado === 'no_cumple' ? 1 + Math.floor(rnd() * 3) : null;
         return {
           id: newId(), evaluacion_id: id, pregunta_id: p.id, categoria: p.cat, categoria_color: p.color, texto: p.texto, ayuda: p.ayuda,
-          evidencia_regla: p.evidencia, peso: p.peso, orden: k + 1, resultado,
+          evidencia_regla: p.evidencia, peso: p.peso, orden: k + 1, resultado, calificacion,
           comentario: resultado === 'no_cumple' ? 'Hallazgo de ejemplo.' : null,
         };
       });

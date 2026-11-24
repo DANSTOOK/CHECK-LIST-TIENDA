@@ -10,6 +10,11 @@ import path from 'node:path';
 import type { EvaluacionFull } from './evaluaciones';
 import { storage } from './storage';
 import { fmtDate, fmtDateTime, RESULTADOS, type Resultado } from './format';
+import { etiquetaEstrellas } from './score';
+
+// Estrella para dibujar la calificación (las fuentes estándar del PDF no traen ★).
+const STAR = 'M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z';
+const GOLD = rgb(0.949, 0.69, 0.118), ORANGE = rgb(0.937, 0.541, 0.29), EMPTY = rgb(0.85, 0.84, 0.81);
 
 const W = 612, H = 792, M = 42; // Carta
 const INK = rgb(0.11, 0.106, 0.094), MUTED = rgb(0.43, 0.416, 0.384), LINE = rgb(0.906, 0.898, 0.875);
@@ -109,7 +114,7 @@ export async function generarPdf(ev: EvaluacionFull, anterior?: { porcentaje: nu
     const t = Math.abs(d) < 0.5 ? '= Se mantuvo vs anterior' : d > 0 ? `+${d} pts vs anterior` : `${d} pts vs anterior`;
     text(t, M + 16, y - 64, 8, font, MUTED);
   }
-  const stats: [string, number][] = [['Total preguntas', ev.total], ['Cumplen', ev.cumple], ['No cumplen', ev.noCumple], ['No aplican', ev.noAplica]];
+  const stats: [string, number][] = [['Total preguntas', ev.total], ['Bien (4-5)', ev.cumple], ['Hallazgos (1-3)', ev.noCumple], ['No aplican', ev.noAplica]];
   stats.forEach(([k, v], i) => {
     const x = M + 175 + i * 92;
     text(k.toUpperCase(), x, y - 20, 7, bold, MUTED);
@@ -149,9 +154,19 @@ export async function generarPdf(ev: EvaluacionFull, anterior?: { porcentaje: nu
 
     const key = r.resultado ?? 'pend';
     const [bg, fg] = TONES[key] ?? TONES.pend;
-    const label = r.resultado ? RESULTADOS[r.resultado as Resultado].label : 'Sin respuesta';
-    page.drawRectangle({ x: W - M - tagW, y: y - 5, width: tagW, height: 17, color: bg });
-    text(label, W - M - tagW + (tagW - bold.widthOfTextAtSize(label, 8.5)) / 2, y, 8.5, bold, fg);
+    if (r.calificacion) {
+      // 5 estrellas + "4/5 Bien"
+      const n = r.calificacion, sx = W - M - tagW;
+      for (let k = 0; k < 5; k++) {
+        page.drawSvgPath(STAR, { x: sx + k * 15, y: y + 14, scale: 0.6, color: k < n ? (n <= 3 ? ORANGE : GOLD) : EMPTY, borderWidth: 0 });
+      }
+      const lab = n + '/5 ' + etiquetaEstrellas(n);
+      text(lab, sx + (tagW - bold.widthOfTextAtSize(lab, 8)) / 2, y - 6, 8, bold, fg);
+    } else {
+      const label = r.resultado ? RESULTADOS[r.resultado as Resultado].label : 'Sin respuesta';
+      page.drawRectangle({ x: W - M - tagW, y: y - 5, width: tagW, height: 17, color: bg });
+      text(label, W - M - tagW + (tagW - bold.widthOfTextAtSize(label, 8.5)) / 2, y, 8.5, bold, fg);
+    }
 
     for (const l of qLines) { text(l, M, y, 10.5, bold); y -= 13; }
     for (const l of aLines) { text(l, M, y, 8.5, font, MUTED); y -= 11; }

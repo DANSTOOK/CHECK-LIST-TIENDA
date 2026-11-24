@@ -94,7 +94,7 @@ export default function PreguntasAdmin({ categorias, preguntas }: { categorias: 
           <div className="grid-3">
             <label className="field">Categoría<select value={pf.categoriaId} onChange={e => setPf({ ...pf, categoriaId: e.target.value })}>{categorias.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}</select></label>
             <label className="field">Foto de evidencia<select value={pf.evidencia} onChange={e => setPf({ ...pf, evidencia: e.target.value })}>
-              <option value="siempre">Obligatoria siempre</option><option value="no_cumple">Obligatoria si no cumple</option><option value="opcional">Opcional</option></select></label>
+              <option value="siempre">Obligatoria siempre</option><option value="no_cumple">Obligatoria con 3 estrellas o menos</option><option value="opcional">Opcional</option></select></label>
             <label className="field">Peso en el %<input type="number" min={1} max={10} value={pf.peso} onChange={e => setPf({ ...pf, peso: Number(e.target.value) })} /></label>
           </div>
           <p className="field-hint">Peso: 1 = normal. Una pregunta con peso 2 cuenta el doble en el % de cumplimiento.</p>

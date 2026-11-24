@@ -11,6 +11,7 @@
  */
 import type { EvaluacionFull } from './evaluaciones';
 import { fmtDateTime, RESULTADOS, type Resultado } from './format';
+import { etiquetaEstrellas } from './score';
 
 const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
 
@@ -33,11 +34,13 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
   }
   const td = 'padding:6px 10px;border-bottom:1px solid #e7e5df;font-size:13px;vertical-align:top;';
   const filas = ev.respuestas.map((r, i) => {
-    const res = r.resultado ? RESULTADOS[r.resultado as Resultado].label : 'Sin respuesta';
+    const res = r.calificacion
+      ? `<span style="color:${r.calificacion <= 3 ? '#e07a35' : '#e0a20b'};letter-spacing:1px;">${'★'.repeat(r.calificacion)}</span><span style="color:#d8d5cc;letter-spacing:1px;">${'★'.repeat(5 - r.calificacion)}</span> ${r.calificacion}/5 ${etiquetaEstrellas(r.calificacion)}`
+      : r.resultado ? RESULTADOS[r.resultado as Resultado].label : 'Sin respuesta';
     const bg = r.resultado === 'cumple' ? '#e7f1ea' : r.resultado === 'no_cumple' ? '#fbe9e5' : '#f1f0ec';
     const fg = r.resultado === 'cumple' ? '#24603f' : r.resultado === 'no_cumple' ? '#a8361f' : '#85827a';
     return `<tr><td style="${td}color:#6d6a62;">${i + 1}</td><td style="${td}">${esc(r.texto)}<div style="color:#6d6a62;font-size:12px;">${esc(r.categoria)}</div></td>
-      <td style="${td}"><span style="background:${bg};color:${fg};padding:2px 8px;border-radius:5px;font-weight:600;font-size:12px;white-space:nowrap;">${res}</span></td>
+      <td style="${td}">${r.calificacion ? `<span style="font-weight:600;font-size:12px;white-space:nowrap;">${res}</span>` : `<span style="background:${bg};color:${fg};padding:2px 8px;border-radius:5px;font-weight:600;font-size:12px;white-space:nowrap;">${res}</span>`}</td>
       <td style="${td}">${esc(r.comentario || '')}</td><td style="${td}text-align:center;">${r.evidencias.length || ''}</td></tr>`;
   }).join('');
   const kpi = (l: string, v: string | number, c = '#1c1b18') =>
@@ -56,12 +59,12 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
   <h3 style="font-size:15px;margin:18px 0 6px;">Resumen ejecutivo</h3>
   <table style="border-collapse:collapse;border:1px solid #e7e5df;border-radius:8px;background:#faf9f7;"><tr>
     <td style="padding:10px 16px;"><div style="font-size:12px;color:#6d6a62;">Cumplimiento</div><div style="font-size:30px;font-weight:700;color:${color};">${p == null ? '—' : p.toFixed(1) + '%'}</div></td>
-    ${kpi('Preguntas', ev.total)}${kpi('Cumplen', ev.cumple, '#24603f')}${kpi('No cumplen', ev.noCumple, ev.noCumple ? '#a8361f' : '#1c1b18')}${kpi('No aplican', ev.noAplica)}
+    ${kpi('Preguntas', ev.total)}${kpi('Bien (4-5★)', ev.cumple, '#24603f')}${kpi('Hallazgos (1-3★)', ev.noCumple, ev.noCumple ? '#a8361f' : '#1c1b18')}${kpi('No aplican', ev.noAplica)}
   </tr></table>
   ${comp ? `<p style="font-size:13px;color:#4b4943;margin:8px 0 0;">${comp}</p>` : ''}
   <h3 style="font-size:15px;margin:20px 0 6px;">Hallazgos encontrados (${hallazgos.length})</h3>
   ${hallazgos.length ? `<ul style="font-size:13px;padding-left:18px;margin:0;">${hallazgos.map(h =>
-    `<li style="margin-bottom:4px;"><b>${esc(h.categoria)}:</b> ${esc(h.texto)}${h.comentario ? ` — <i>${esc(h.comentario)}</i>` : ''}</li>`).join('')}</ul>`
+    `<li style="margin-bottom:4px;"><b>${esc(h.categoria)}${h.calificacion ? ` (${h.calificacion}/5)` : ''}:</b> ${esc(h.texto)}${h.comentario ? ` — <i>${esc(h.comentario)}</i>` : ''}</li>`).join('')}</ul>`
     : '<p style="font-size:13px;color:#24603f;margin:0;">Sin hallazgos. ¡Buen trabajo!</p>'}
   ${ev.observaciones ? `<h3 style="font-size:15px;margin:20px 0 6px;">Observaciones</h3><p style="font-size:13px;white-space:pre-wrap;margin:0;">${esc(ev.observaciones)}</p>` : ''}
   <h3 style="font-size:15px;margin:20px 0 6px;">Detalle por pregunta</h3>

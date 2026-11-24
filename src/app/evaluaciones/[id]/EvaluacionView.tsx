@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { fmtDateTime } from '@/lib/format';
-import { Icon, PctTag, ResultTag, Trend } from '@/components/ui';
+import { Icon, PctTag, ResultTag, Stars, Trend } from '@/components/ui';
 import { u } from '@/lib/base';
 import type { EvaluacionViewData } from '@/lib/vistas/evaluacion';
 import Runner from './Runner';
@@ -41,8 +41,8 @@ export default function EvaluacionView({ ev, puedeEditar, anterior }: Evaluacion
         </div>
         <div className="kpis res-kpis">
           <div className="kpi"><span className="kpi-l">Preguntas</span><span className="kpi-v">{ev.total}</span></div>
-          <div className="kpi"><span className="kpi-l">Cumplen</span><span className="kpi-v t-done">{ev.cumple}</span></div>
-          <div className={`kpi ${ev.noCumple ? 'is-alert' : ''}`}><span className="kpi-l">No cumplen</span><span className="kpi-v">{ev.noCumple}</span></div>
+          <div className="kpi"><span className="kpi-l">Bien (4-5★)</span><span className="kpi-v t-done">{ev.cumple}</span></div>
+          <div className={`kpi ${ev.noCumple ? 'is-alert' : ''}`}><span className="kpi-l">Hallazgos (1-3★)</span><span className="kpi-v">{ev.noCumple}</span></div>
           <div className="kpi"><span className="kpi-l">No aplican</span><span className="kpi-v">{ev.noAplica}</span></div>
         </div>
       </section>
@@ -68,7 +68,7 @@ export default function EvaluacionView({ ev, puedeEditar, anterior }: Evaluacion
                 <div className="det-row">
                   <span className="q-n">{i + 1}</span>
                   <div className="det-body">
-                    <div className="det-top"><b>{r.texto}</b><ResultTag r={r.resultado} /></div>
+                    <div className="det-top"><b>{r.texto}</b>{r.calificacion ? <span className="det-rate"><Stars value={r.calificacion} small /><span className={r.calificacion <= 3 ? 't-danger' : 't-done'}>{r.calificacion}/5</span></span> : <ResultTag r={r.resultado} />}</div>
                     {r.comentario && <p className="det-comment">{r.comentario}</p>}
                     {r.evidencias.length > 0 && <Gallery ids={r.evidencias.map(f => f.id)} />}
                   </div>

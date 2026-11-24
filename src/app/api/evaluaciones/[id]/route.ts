@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { handler, ok } from '@/lib/api';
 import { editable } from '@/lib/guard';
 import { recalcular } from '@/lib/evaluaciones';
+import { resultadoDe } from '@/lib/score';
 import { storage } from '@/lib/storage';
 
 type Ctx = { params: Promise<{ id: string }> };
@@ -14,12 +15,18 @@ export const PATCH = handler<Ctx>(async (req, { params }, user) => {
   if (error) return error;
   const b = (await req.json()) as {
     observaciones?: string | null;
-    respuestas?: { id: string; resultado?: string | null; comentario?: string | null }[];
+    respuestas?: { id: string; resultado?: string | null; calificacion?: number | null; comentario?: string | null }[];
   };
   await db.transaction().execute(async tx => {
     for (const r of b.respuestas ?? []) {
-      const set: { resultado?: string | null; comentario?: string | null } = {};
-      if (r.resultado !== undefined) set.resultado = r.resultado && RES.has(r.resultado) ? r.resultado : null;
+      const set: { resultado?: string | null; calificacion?: number | null; comentario?: string | null } = {};
+      if (r.resultado !== undefined) { set.resultado = r.resultado && RES.has(r.resultado) ? r.resultado : null; set.calificacion = null; }
+      // Estrellas 1 a 5: el resultado se deriva (4-5 cumple, 1-3 no cumple).
+      if (r.calificacion !== undefined) {
+        const n = Number(r.calificacion);
+        if (r.calificacion === null) { set.calificacion = null; set.resultado = null; }
+        else if (Number.isInteger(n) && n >= 1 && n <= 5) { set.calificacion = n; set.resultado = resultadoDe(n); }
+      }
       if (r.comentario !== undefined) set.comentario = r.comentario?.trim() ? r.comentario.slice(0, 2000) : null;
       if (Object.keys(set).length) await tx.updateTable('respuestas').set(set).where('id', '=', r.id).where('evaluacion_id', '=', id).execute();
     }

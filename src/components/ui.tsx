@@ -144,3 +144,17 @@ export function Empty({ icon = 'info', title, children }: { icon?: string; title
     <div className="empty"><Icon n={icon} className="empty-ic" /><h3>{title}</h3>{children}</div>
   );
 }
+
+const STAR = 'M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z';
+/** Estrella SVG (rellena si on). */
+export function StarIcon({ on }: { on: boolean }) {
+  return <svg className={'star-ic' + (on ? ' is-on' : '')} viewBox="0 0 24 24" aria-hidden="true"><path d={STAR} /></svg>;
+}
+/** Calificación de 1 a 5 estrellas en modo lectura. */
+export function Stars({ value, small = false }: { value: number | null | undefined; small?: boolean }) {
+  return (
+    <span className={'stars' + (small ? ' sm' : '')} role="img" aria-label={value ? value + ' de 5 estrellas' : 'Sin calificar'}>
+      {[1, 2, 3, 4, 5].map(n => <StarIcon key={n} on={(value ?? 0) >= n} />)}
+    </span>
+  );
+}

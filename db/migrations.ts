@@ -140,7 +140,15 @@ const m002: Migration = {
   },
 };
 
+/** 003: calificación de 1 a 5 estrellas por respuesta (estilo Forms). */
+const m003: Migration = {
+  async up(db: Kysely<any>) {
+    await db.schema.alterTable('respuestas').addColumn('calificacion', 'integer').execute();
+  },
+};
+
 export const migrationsFor = (isPg: boolean): Record<string, Migration> => ({
   '001_init': m001(isPg),
   '002_tiendas_ro': m002,
+  '003_calificacion': m003,
 });

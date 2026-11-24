@@ -30,7 +30,7 @@ export async function crearEvaluacion(tiendaId: string, evaluadorId: string) {
         }).execute();
         await tx.insertInto('respuestas').values(preguntas.map((p, i) => ({
           id: newId(), evaluacion_id: id, pregunta_id: p.id, categoria: p.cat, categoria_color: p.color,
-          texto: p.texto, ayuda: p.ayuda, evidencia_regla: p.evidencia, peso: p.peso, orden: i + 1, resultado: null, comentario: null,
+          texto: p.texto, ayuda: p.ayuda, evidencia_regla: p.evidencia, peso: p.peso, orden: i + 1, resultado: null, comentario: null, calificacion: null,
         }))).execute();
       });
       return { id, folio };
@@ -43,7 +43,7 @@ export async function crearEvaluacion(tiendaId: string, evaluadorId: string) {
 
 /** Recalcula y guarda los totales de la evaluación. */
 export async function recalcular(evaluacionId: string) {
-  const resps = await db.selectFrom('respuestas').select(['resultado', 'peso', 'evidencia_regla as evidenciaRegla'])
+  const resps = await db.selectFrom('respuestas').select(['resultado', 'calificacion', 'peso', 'evidencia_regla as evidenciaRegla'])
     .where('evaluacion_id', '=', evaluacionId).execute();
   const c = calcular(resps);
   await db.updateTable('evaluaciones').set({

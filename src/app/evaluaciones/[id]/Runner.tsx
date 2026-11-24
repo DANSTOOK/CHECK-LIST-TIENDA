@@ -15,21 +15,16 @@
  */
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
-import { api, Icon, Lightbox, PctTag, useToast, useAppRouter } from '@/components/ui';
+import { api, Icon, Lightbox, PctTag, StarIcon, Stars, useToast, useAppRouter } from '@/components/ui';
 import { u } from '@/lib/base';
-import { calcular, faltaFoto } from '@/lib/score';
+import { calcular, ESTRELLAS, etiquetaEstrellas, faltaFoto, resultadoDe } from '@/lib/score';
 import { fmtDateTime, REGLAS_EVIDENCIA } from '@/lib/format';
 import type { EvaluacionFull } from '@/lib/evaluaciones';
 
 type Foto = { id: string; mime: string };
-type Resp = { id: string; categoria: string; categoria_color: string; texto: string; ayuda: string | null; evidencia_regla: string; peso: number; resultado: string | null; comentario: string | null; fotos: Foto[] };
+type Resp = { id: string; categoria: string; categoria_color: string; texto: string; ayuda: string | null; evidencia_regla: string; peso: number; resultado: string | null; calificacion: number | null; comentario: string | null; fotos: Foto[] };
 type Modo = 'paso' | 'lista';
 
-const OPCIONES = [
-  { v: 'cumple', label: 'Cumple', icon: 'check', cls: 'o-done' },
-  { v: 'no_cumple', label: 'No cumple', icon: 'x', cls: 'o-danger' },
-  { v: 'no_aplica', label: 'No aplica', icon: 'equal', cls: 'o-na' },
-];
 const ACEPTA = 'image/jpeg,image/png,image/webp';
 const vibrar = (ms = 12) => { try { navigator.vibrate?.(ms); } catch { /* sin vibración */ } };
 
@@ -49,7 +44,7 @@ async function comprimir(file: File): Promise<File> {
 
 /** Qué le falta a una respuesta para poder finalizar (o null si está completa). */
 function pendiente(r: Resp) {
-  if (!r.resultado) return 'Elige una respuesta';
+  if (!r.resultado) return 'Falta calificar';
   if (faltaFoto({ resultado: r.resultado, peso: r.peso, evidenciaRegla: r.evidencia_regla, _fotos: r.fotos.length })) return 'Falta la foto de evidencia';
   if (r.resultado === 'no_cumple' && !r.comentario?.trim()) return 'Describe el hallazgo';
   return null;
@@ -60,7 +55,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
   const toast = useToast();
   const [resps, setResps] = useState<Resp[]>(() => ev.respuestas.map(r => ({
     id: r.id, categoria: r.categoria, categoria_color: r.categoria_color, texto: r.texto, ayuda: r.ayuda, evidencia_regla: r.evidencia_regla,
-    peso: r.peso, resultado: r.resultado, comentario: r.comentario, fotos: r.evidencias.map(f => ({ id: f.id, mime: f.mime })),
+    peso: r.peso, resultado: r.resultado, calificacion: r.calificacion, comentario: r.comentario, fotos: r.evidencias.map(f => ({ id: f.id, mime: f.mime })),
   })));
   const [obs, setObs] = useState(ev.observaciones || '');
   const [saving, setSaving] = useState(0);
@@ -86,7 +81,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
   // Pantalla de captura sin distracciones en celular (oculta la barra de pestañas).
   useEffect(() => { document.body.classList.add('is-running'); return () => document.body.classList.remove('is-running'); }, []);
 
-  const stats = useMemo(() => calcular(resps.map(r => ({ resultado: r.resultado, peso: r.peso, evidenciaRegla: r.evidencia_regla }))), [resps]);
+  const stats = useMemo(() => calcular(resps.map(r => ({ resultado: r.resultado, calificacion: r.calificacion, peso: r.peso, evidenciaRegla: r.evidencia_regla }))), [resps]);
   const contestadas = stats.total - stats.pendientes;
   const total = resps.length;
 
@@ -108,16 +103,29 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [paso, total]);
 
-  const setResultado = (r: Resp, v: string, idx: number) => {
-    const nuevo = r.resultado === v ? null : v; // tocar de nuevo la misma opción la quita
-    vibrar();
-    upd(r.id, { resultado: nuevo });
-    guardar({ respuestas: [{ id: r.id, resultado: nuevo }] });
+  /** Avance automático si ya no falta nada; si es hallazgo, pide el comentario. */
+  const despues = (r: Resp, nuevo: string | null, idx: number) => {
     if (modo !== 'paso' || !nuevo) return;
     const siguiente = { ...r, resultado: nuevo };
     // Avance automático si ya no falta nada; si es hallazgo, pide el comentario.
     if (!pendiente(siguiente)) setTimeout(() => ir(idx + 1), 420);
     else if (nuevo === 'no_cumple' && !faltaFoto({ resultado: nuevo, peso: r.peso, evidenciaRegla: r.evidencia_regla, _fotos: r.fotos.length })) setTimeout(() => comentarioRef.current?.focus(), 150);
+  };
+  /** Calificación con estrellas: 4-5 cumple, 1-3 es hallazgo. */
+  const calificar = (r: Resp, n: number, idx: number) => {
+    vibrar();
+    const resultado = resultadoDe(n);
+    upd(r.id, { calificacion: n, resultado });
+    guardar({ respuestas: [{ id: r.id, calificacion: n }] });
+    despues(r, resultado, idx);
+  };
+  /** "No aplica" (tocar de nuevo lo quita). */
+  const noAplica = (r: Resp, idx: number) => {
+    vibrar();
+    const nuevo = r.resultado === 'no_aplica' ? null : 'no_aplica';
+    upd(r.id, { calificacion: null, resultado: nuevo });
+    guardar({ respuestas: [{ id: r.id, resultado: nuevo }] });
+    despues(r, nuevo, idx);
   };
   const setComentario = (r: Resp, txt: string) => {
     upd(r.id, { comentario: txt });
@@ -217,12 +225,21 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <h3>{r.texto}</h3>{r.ayuda && <p>{r.ayuda}</p>}
           </div>
         </div>
-        <div className="q-opts" role="radiogroup" aria-label="Respuesta">
-          {OPCIONES.map(o => (
-            <button key={o.v} type="button" role="radio" aria-checked={r.resultado === o.v} className={`q-opt ${o.cls} ${r.resultado === o.v ? 'is-on' : ''}`} onClick={() => setResultado(r, o.v, idx)}>
-              <Icon n={o.icon} /><span>{o.label}</span>
-            </button>
-          ))}
+        <div className={'rate' + (r.resultado === 'no_aplica' ? ' is-na' : '')}>
+          <div className="rate-stars" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+            {ESTRELLAS.map(e => (
+              <button key={e.n} type="button" role="radio" aria-checked={r.calificacion === e.n} aria-label={e.n + (e.n > 1 ? ' estrellas: ' : ' estrella: ') + e.label}
+                className={'rate-star' + ((r.calificacion ?? 0) >= e.n ? ' is-on' : '') + (r.calificacion != null && r.calificacion <= 3 ? ' is-low' : '')} onClick={() => calificar(r, e.n, idx)}>
+                <StarIcon on={(r.calificacion ?? 0) >= e.n} />
+              </button>
+            ))}
+          </div>
+          <div className="rate-foot">
+            <span className={'rate-label' + (r.calificacion != null ? (r.calificacion <= 3 ? ' t-danger' : ' t-done') : '')}>
+              {r.resultado === 'no_aplica' ? 'No aplica en esta tienda' : r.calificacion ? r.calificacion + ' de 5 · ' + etiquetaEstrellas(r.calificacion) + (r.calificacion <= 3 ? ' · hallazgo' : '') : 'Toca las estrellas para calificar'}
+            </span>
+            <button type="button" className={'na-btn' + (r.resultado === 'no_aplica' ? ' is-on' : '')} onClick={() => noAplica(r, idx)}>No aplica</button>
+          </div>
         </div>
         <div className={`q-evid ${necesitaFoto ? 'is-need' : ''}`}>
           <div className="q-evid-head">
@@ -301,7 +318,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <div key="fin" className={`slide slide-${dir}`}>
               <section className="panel resumen">
                 <div className="panel-head"><h2>Resumen</h2><span className="muted">Revisa antes de finalizar</span></div>
-                <div className="res-big"><PctTag value={stats.porcentaje} big /><span className="muted">{stats.cumple} cumplen · {stats.noCumple} no cumplen · {stats.noAplica} no aplican</span></div>
+                <div className="res-big"><PctTag value={stats.porcentaje} big /><span className="muted">{stats.cumple} bien (4-5★) · {stats.noCumple} hallazgos (1-3★) · {stats.noAplica} no aplican</span></div>
                 <ul className="res-list">
                   {resps.map((r, i) => {
                     const m = problemas[r.id] || pendiente(r);
@@ -309,7 +326,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
                       <li key={r.id}>
                         <button type="button" onClick={() => ir(i)} className={m ? 'is-bad' : ''}>
                           <span className={`dot d-${r.resultado ?? 'pend'}`} />
-                          <span className="rl-txt"><b>{i + 1}. {r.texto}</b>{m ? <em>{m}</em> : <span>{r.fotos.length} foto{r.fotos.length === 1 ? '' : 's'}{r.comentario ? ' · con comentario' : ''}</span>}</span>
+                          <span className="rl-txt"><b>{i + 1}. {r.texto}</b>{r.calificacion ? <Stars value={r.calificacion} small /> : r.resultado === 'no_aplica' ? <span>No aplica</span> : null}{m ? <em>{m}</em> : <span>{r.fotos.length} foto{r.fotos.length === 1 ? '' : 's'}{r.comentario ? ' · con comentario' : ''}</span>}</span>
                           <Icon n="chevron" className="chev" />
                         </button>
                       </li>

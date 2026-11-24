@@ -40,6 +40,8 @@ export interface RespuestasT {
   id: string; evaluacion_id: string; pregunta_id: string | null; categoria: string; categoria_color: string;
   texto: string; ayuda: string | null; evidencia_regla: string; peso: number; orden: number;
   resultado: string | null; comentario: string | null;
+  /** 1 a 5 estrellas (null = sin calificar o No aplica) */
+  calificacion: number | null;
 }
 export interface EvidenciasT {
   id: string; respuesta_id: string; evaluacion_id: string; tienda_cr: string; pregunta_id: string | null;

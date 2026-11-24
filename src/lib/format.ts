@@ -8,7 +8,7 @@ export type Resultado = keyof typeof RESULTADOS;
 
 export const REGLAS_EVIDENCIA: Record<string, string> = {
   siempre: 'Foto obligatoria siempre',
-  no_cumple: 'Foto obligatoria si no cumple',
+  no_cumple: 'Foto obligatoria con 3 estrellas o menos',
   opcional: 'Foto opcional',
 };
 
