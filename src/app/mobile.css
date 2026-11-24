@@ -164,3 +164,4 @@ button, a, label { -webkit-tap-highlight-color: transparent; }
 .pick-main { flex: 1; }
 .q-big .q-opt { flex-direction: row !important; gap: 12px !important; }
 .q-big .q-opt span { font-weight: 600; }
+@media (max-width: 860px) { .demo-badge { display: none; } }
