@@ -28,9 +28,14 @@ export function DemoShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!('serviceWorker' in navigator)) { setError('Este navegador no permite la versión de prueba (service workers).'); return; }
     const first = !navigator.serviceWorker.controller;
-    navigator.serviceWorker.register(u('/sw.js'), { scope: u('/') }).catch(e => setError(String(e)));
-    // La primera visita (o un enlace directo) se recarga una vez ya con la "API" del demo activa.
-    if (first) { navigator.serviceWorker.addEventListener('controllerchange', () => location.reload(), { once: true }); return; }
+    // Cuando se publica una versión nueva, el service worker nuevo toma el control y la
+    // página se recarga una vez para mostrar los datos y pantallas actualizados.
+    // (También aplica en la primera visita o al abrir un enlace directo.)
+    navigator.serviceWorker.addEventListener('controllerchange', () => location.reload(), { once: true });
+    navigator.serviceWorker.register(u('/sw.js'), { scope: u('/'), updateViaCache: 'none' })
+      .then(r => r.update())
+      .catch(e => setError(String(e)));
+    if (first) return;
     load();
     window.addEventListener('ckl-refresh', load);
     return () => window.removeEventListener('ckl-refresh', load);
