@@ -15,7 +15,7 @@
  */
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
-import { api, Icon, Lightbox, PctTag, StarIcon, Stars, useToast, useAppRouter } from '@/components/ui';
+import { api, confetti, CountUp, Icon, Lightbox, PctTag, StarIcon, Stars, reduceMotion, useToast, useAppRouter } from '@/components/ui';
 import { u } from '@/lib/base';
 import { calcular, ESTRELLAS, etiquetaEstrellas, faltaFoto, resultadoDe } from '@/lib/score';
 import { fmtDateTime, REGLAS_EVIDENCIA } from '@/lib/format';
@@ -67,6 +67,9 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
   // Paso actual: 0..n-1 = preguntas, n = resumen. Arranca en la primera sin terminar.
   const [paso, setPaso] = useState(() => { const i = ev.respuestas.findIndex(r => !r.resultado); return i < 0 ? ev.respuestas.length : i; });
   const [dir, setDir] = useState<'next' | 'prev'>('next');
+  const [destello, setDestello] = useState<string | null>(null); // pregunta que recibió 5 estrellas
+  const [exito, setExito] = useState<number | null | undefined>(undefined); // pantalla de éxito al finalizar
+  const [pista, setPista] = useState(false); // pista de "desliza" la primera vez
   const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
   const comentarioRef = useRef<HTMLTextAreaElement>(null);
   const toque = useRef<{ x: number; y: number } | null>(null);
@@ -77,6 +80,14 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
     try { const g = localStorage.getItem('ckl-modo'); if (g === 'paso' || g === 'lista') m = g; } catch { /* */ }
     setModo(m);
   }, []);
+  useEffect(() => {
+    if (modo !== 'paso') return;
+    try { if (localStorage.getItem('ckl-pista-desliza')) return; } catch { return; }
+    setPista(true);
+    const t = setTimeout(() => cerrarPista(), 4200);
+    return () => clearTimeout(t);
+  }, [modo]);
+  const cerrarPista = () => { setPista(false); try { localStorage.setItem('ckl-pista-desliza', '1'); } catch { /* */ } };
   const cambiarModo = (m: Modo) => { setModo(m); try { localStorage.setItem('ckl-modo', m); } catch { /* */ } };
   // Pantalla de captura sin distracciones en celular (oculta la barra de pestañas).
   useEffect(() => { document.body.classList.add('is-running'); return () => document.body.classList.remove('is-running'); }, []);
@@ -117,6 +128,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
     const resultado = resultadoDe(n);
     upd(r.id, { calificacion: n, resultado });
     guardar({ respuestas: [{ id: r.id, calificacion: n }] });
+    if (n === 5) { setDestello(r.id); setTimeout(() => setDestello(d => (d === r.id ? null : d)), 900); }
     despues(r, resultado, idx);
   };
   /** "No aplica" (tocar de nuevo lo quita). */
@@ -186,8 +198,9 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
       await api(u(`/api/evaluaciones/${ev.id}`), { method: 'PATCH', body: { observaciones: obs, respuestas: resps.map(r => ({ id: r.id, comentario: r.comentario })) } });
       await api(u(`/api/evaluaciones/${ev.id}/finalizar`), { body: {} });
       vibrar(30);
-      toast('Evaluación finalizada');
-      router.refresh();
+      setExito(stats.porcentaje);
+      confetti((stats.porcentaje ?? 0) >= 90);
+      setTimeout(() => router.refresh(), reduceMotion() ? 300 : 2200);
     } catch (e) {
       const d = (e as { data?: { problemas?: { id: string; motivo: string }[] } }).data;
       if (d?.problemas) setProblemas(Object.fromEntries(d.problemas.map(x => [x.id, x.motivo])));
@@ -225,7 +238,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <h3>{r.texto}</h3>{r.ayuda && <p>{r.ayuda}</p>}
           </div>
         </div>
-        <div className={'rate' + (r.resultado === 'no_aplica' ? ' is-na' : '')}>
+        <div className={'rate' + (r.resultado === 'no_aplica' ? ' is-na' : '') + (destello === r.id ? ' is-burst' : '')}>
           <div className="rate-stars" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
             {ESTRELLAS.map(e => (
               <button key={e.n} type="button" role="radio" aria-checked={r.calificacion === e.n} aria-label={e.n + (e.n > 1 ? ' estrellas: ' : ' estrella: ') + e.label}
@@ -288,9 +301,10 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
           </div>
           <span className={`save-dot ${saving > 0 ? 'is-saving' : ''}`} title={saving > 0 ? 'Guardando…' : 'Guardado'}>{saving > 0 ? 'Guardando…' : 'Guardado'}</span>
         </div>
+        <div className="run-progress" aria-hidden="true"><span style={{ width: `${(contestadas / total) * 100}%` }} /></div>
         <div className="run-steps" role="tablist" aria-label="Preguntas">
           {resps.map((r, i) => (
-            <button key={r.id} type="button" role="tab" aria-selected={modo === 'paso' && paso === i} aria-label={`Pregunta ${i + 1}`}
+            <button key={r.id + estadoPaso(r)} type="button" role="tab" aria-selected={modo === 'paso' && paso === i} aria-label={`Pregunta ${i + 1}`}
               className={`step s-${estadoPaso(r)} ${modo === 'paso' && paso === i ? 'is-current' : ''}`}
               onClick={() => (modo === 'paso' ? ir(i) : document.getElementById(`q-${r.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }))}>
               {i + 1}
@@ -318,7 +332,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <div key="fin" className={`slide slide-${dir}`}>
               <section className="panel resumen">
                 <div className="panel-head"><h2>Resumen</h2><span className="muted">Revisa antes de finalizar</span></div>
-                <div className="res-big"><PctTag value={stats.porcentaje} big /><span className="muted">{stats.cumple} bien (4-5★) · {stats.noCumple} hallazgos (1-3★) · {stats.noAplica} no aplican</span></div>
+                <div className="res-big"><PctTag value={stats.porcentaje} big animado /><span className="muted">{stats.cumple} bien (4-5★) · {stats.noCumple} hallazgos (1-3★) · {stats.noAplica} no aplican</span></div>
                 <ul className="res-list">
                   {resps.map((r, i) => {
                     const m = problemas[r.id] || pendiente(r);
@@ -345,7 +359,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <button type="button" className="btn run-prev" onClick={() => ir(paso - 1)} disabled={paso === 0} aria-label="Anterior"><Icon n="chevron" />Anterior</button>
             {enResumen
               ? <button type="button" className="btn btn-primary run-next" onClick={finalizar} disabled={finalizando || saving > 0}><Icon n="check" />{finalizando ? 'Finalizando…' : 'Finalizar evaluación'}</button>
-              : <button type="button" className={`btn run-next ${actual && !pendiente(actual) ? 'btn-primary' : ''}`} onClick={() => ir(paso + 1)}>{paso === total - 1 ? 'Ir al resumen' : 'Siguiente'}<Icon n="chevron" /></button>}
+              : <button type="button" className={`btn run-next ${actual && !pendiente(actual) ? 'btn-primary is-ready' : ''}`} onClick={() => ir(paso + 1)}>{paso === total - 1 ? 'Ir al resumen' : 'Siguiente'}<Icon n="chevron" /></button>}
           </div>
         </div>
       ) : (
@@ -373,6 +387,23 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
         </>
       )}
       <Lightbox urls={lb?.urls ?? []} index={lb?.i ?? null} onClose={() => setLb(null)} />
+      {pista && modo === 'paso' && (
+        <button type="button" className="swipe-hint" onClick={cerrarPista} aria-label="Cerrar pista">
+          <span className="swipe-hand" aria-hidden="true">👆</span>
+          <b>Desliza a la izquierda o derecha</b>
+          <span>para cambiar de pregunta</span>
+        </button>
+      )}
+      {exito !== undefined && (
+        <div className="exito" role="status">
+          <div className="exito-card">
+            <svg className="exito-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" /><path d="M15 27l7 7 15-16" /></svg>
+            <h2>¡Evaluación finalizada!</h2>
+            <p className="exito-pct"><CountUp value={exito} /></p>
+            <p className="muted">{ev.tienda.nombre} · CR {ev.tienda.cr}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

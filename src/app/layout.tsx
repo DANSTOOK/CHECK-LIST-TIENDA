@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './base.css';
 import './ckl.css';
 import './mobile.css';
+import './effects.css';
 import { ToastProvider } from '@/components/ui';
 import { DemoShell, Shell } from '@/components/Shell';
 import { IS_DEMO } from '@/lib/base';

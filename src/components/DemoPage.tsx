@@ -5,7 +5,7 @@
  */
 import { Suspense, useEffect, useState, type ComponentType } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { api, Empty } from './ui';
+import { api, Empty, Skeleton } from './ui';
 import { u } from '@/lib/base';
 
 type Props = { vista: string; param?: string; View: ComponentType<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -26,11 +26,11 @@ function Inner({ vista, param, View }: Props) {
     window.addEventListener('ckl-refresh', load);
     return () => { vivo = false; window.removeEventListener('ckl-refresh', load); };
   }, [url]);
-  if (data === undefined) return <p className="muted">Cargando…</p>;
+  if (data === undefined) return <Skeleton />;
   if (data === null) return <div className="panel"><Empty icon="alert" title="No disponible" ><p>No existe o tu rol no tiene acceso.</p></Empty></div>;
   return <View key={url} {...data} />;
 }
 
 export default function DemoPage(props: Props) {
-  return <Suspense fallback={<p className="muted">Cargando…</p>}><Inner {...props} /></Suspense>;
+  return <Suspense fallback={<Skeleton />}><Inner {...props} /></Suspense>;
 }

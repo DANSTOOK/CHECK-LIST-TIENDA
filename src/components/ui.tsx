@@ -117,9 +117,9 @@ export function Lightbox({ urls, index, onClose }: { urls: string[]; index: numb
 }
 
 // ---------------------------------------------------------------- Indicadores
-export function PctTag({ value, big = false }: { value: number | null | undefined; big?: boolean }) {
+export function PctTag({ value, big = false, animado = false }: { value: number | null | undefined; big?: boolean; animado?: boolean }) {
   const t = tone(value);
-  return <span className={`pct-tag t-${t} ${big ? 'big' : ''}`}>{pct(value, value != null && value % 1 ? 1 : 0)}</span>;
+  return <span className={`pct-tag t-${t} ${big ? 'big' : ''}`}>{animado ? <CountUp value={value} /> : pct(value, value != null && value % 1 ? 1 : 0)}</span>;
 }
 
 export function Trend({ actual, anterior, compact = false }: { actual: number | null | undefined; anterior: number | null | undefined; compact?: boolean }) {
@@ -156,5 +156,51 @@ export function Stars({ value, small = false }: { value: number | null | undefin
     <span className={'stars' + (small ? ' sm' : '')} role="img" aria-label={value ? value + ' de 5 estrellas' : 'Sin calificar'}>
       {[1, 2, 3, 4, 5].map(n => <StarIcon key={n} on={(value ?? 0) >= n} />)}
     </span>
+  );
+}
+
+// ---------------------------------------------------------------- Animaciones
+/** Respeta la preferencia del sistema de reducir movimiento. */
+export const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Celebración con confeti (la misma del planificador de aperturas). */
+export function confetti(big = false) {
+  if (typeof window === 'undefined' || reduceMotion()) return;
+  const cv = document.createElement('canvas'); cv.className = 'confetti'; document.body.append(cv);
+  const W = innerWidth, H = innerHeight, dpr = devicePixelRatio || 1;
+  cv.width = W * dpr; cv.height = H * dpr; const g = cv.getContext('2d')!; g.scale(dpr, dpr);
+  const colors = ['#e82127', '#f6a623', '#16a34a', '#2563eb', '#eab308', '#7c3aed', '#be185d'];
+  const ps = Array.from({ length: big ? 220 : 120 }, () => ({ x: W / 2 + (Math.random() - .5) * 240, y: H * .38, vx: (Math.random() - .5) * 14, vy: -Math.random() * 12 - 5, s: Math.random() * 7 + 5, r: Math.random() * 6, vr: (Math.random() - .5) * .35, c: colors[Math.floor(Math.random() * colors.length)] }));
+  const t0 = performance.now(), dur = big ? 2600 : 1900;
+  (function frame(t: number) {
+    const e = t - t0; g.clearRect(0, 0, W, H);
+    ps.forEach(p => { p.vy += .32; p.x += p.vx; p.y += p.vy; p.vx *= .985; p.r += p.vr; g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.globalAlpha = Math.max(0, 1 - e / dur); g.fillStyle = p.c; g.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); g.restore(); });
+    if (e < dur) requestAnimationFrame(frame); else cv.remove();
+  })(t0);
+}
+
+/** Número que cuenta desde 0 hasta el valor (para el % de cumplimiento). */
+export function CountUp({ value, suffix = '%', ms = 900 }: { value: number | null | undefined; suffix?: string; ms?: number }) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (value == null) return;
+    if (reduceMotion()) { setV(value); return; }
+    let raf = 0; const t0 = performance.now();
+    const step = (t: number) => { const k = Math.min(1, (t - t0) / ms); setV(value * (1 - Math.pow(1 - k, 3))); if (k < 1) raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [value, ms]);
+  if (value == null) return <>—</>;
+  return <>{(value % 1 ? v.toFixed(1) : Math.round(v)) + suffix}</>;
+}
+
+/** Esqueleto de carga (reemplaza el texto "Cargando…"). */
+export function Skeleton({ lines = 3 }: { lines?: number }) {
+  return (
+    <div className="skel" aria-busy="true" aria-label="Cargando">
+      <div className="skel-line w40 h24" />
+      <div className="skel-line w70" />
+      {Array.from({ length: lines }).map((_, i) => <div key={i} className="skel-card" style={{ animationDelay: i * 90 + 'ms' }} />)}
+    </div>
   );
 }

@@ -41,7 +41,7 @@ export function DemoShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('ckl-refresh', load);
   }, [load]);
   if (error) return <div className="login"><div className="login-card panel"><Icon n="alert" /><p>{error}</p></div></div>;
-  if (!data) return <div className="login"><p className="muted">Preparando la aplicación…</p></div>;
+  if (!data) return <div className="login"><div className="boot"><span className="brand-mark boot-mark" aria-hidden="true"><i></i><i></i><i></i></span><p className="muted">Preparando la aplicación…</p></div></div>;
   return (
     <>
       <Shell {...data}>{children}</Shell>

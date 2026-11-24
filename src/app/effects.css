@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Animaciones y efectos para hacer la app más intuitiva.
+   Todas se desactivan si el sistema pide "reducir movimiento".
+   ========================================================================== */
+:root { --spring: cubic-bezier(.2, .9, .25, 1.15); --ease-out: cubic-bezier(.2, .8, .2, 1); }
+
+/* ---------- Entrada de cada pantalla ---------- */
+.main > * { animation: page-in .32s var(--ease-out) backwards; }
+@keyframes page-in { from { opacity: 0; transform: translateY(10px); } }
+.panel, .kpis, .q-card { animation: card-in .35s var(--ease-out) backwards; }
+.panel:nth-of-type(2) { animation-delay: 50ms; }
+.panel:nth-of-type(3) { animation-delay: 100ms; }
+.panel:nth-of-type(4) { animation-delay: 150ms; }
+@keyframes card-in { from { opacity: 0; transform: translateY(8px) scale(.995); } }
+
+/* ---------- Respuesta al toque (todo lo que se puede tocar se "hunde" un poco) ---------- */
+.btn, .pick, .tab-item, .step, .na-btn, .nav, .side-store, .icon-btn, .res-list button, .thumb-btn, .seg button {
+  transition: transform .12s ease, background .15s, border-color .15s, box-shadow .2s, color .15s;
+}
+.btn:active:not([disabled]), .pick:active, .na-btn:active, .res-list button:active, .nav:active, .side-store:active { transform: scale(.97); }
+.step:active { transform: scale(.9); }
+.icon-btn:active { transform: scale(.88); }
+.btn-primary:not([disabled]):hover { box-shadow: 0 6px 16px -8px rgba(28, 27, 24, .55); }
+
+/* Onda al tocar en botones principales */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255, 255, 255, .35) 0, transparent 60%); opacity: 0; transform: scale(.2); transition: opacity .4s, transform .4s; pointer-events: none; }
+.btn-primary:active::after { opacity: 1; transform: scale(2); transition: 0s; }
+
+/* ---------- Barra inferior ---------- */
+.tab-item .ic { transition: transform .25s var(--spring); }
+.tab-item.is-active .ic { transform: translateY(-2px) scale(1.12); }
+.tab-item:active .ic { transform: scale(.85); }
+.tab-item.is-active::before { animation: tab-bar-in .3s var(--spring); }
+@keyframes tab-bar-in { from { transform: scaleX(0); } }
+.topbar-badge { animation: badge-pop .5s var(--spring); }
+@keyframes badge-pop { from { transform: scale(0); } }
+
+/* ---------- Inicio ---------- */
+.sugerencias .pick { animation: sug-in .26s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
+@keyframes sug-in { from { opacity: 0; transform: translateY(-6px); } }
+.pick-sel { animation: sel-in .35s var(--spring); }
+.pick-sel .pick-check { animation: check-pop .45s var(--spring) .1s backwards; }
+@keyframes sel-in { from { opacity: 0; transform: scale(.96); } }
+@keyframes check-pop { from { transform: scale(0) rotate(-45deg); } }
+.buscador .search input { transition: border-color .15s, box-shadow .2s, background .15s; }
+.buscador .search input:focus { box-shadow: 0 0 0 4px var(--ring), 0 8px 20px -14px rgba(0, 0, 0, .35); }
+.inicio-go.is-ready { animation: go-ready .5s var(--spring); }
+.inicio-go.is-ready::before { content: ''; position: absolute; top: 0; bottom: 0; left: -40%; width: 35%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .35), transparent); transform: skewX(-18deg); animation: shine 2.4s ease-in-out 0.6s infinite; pointer-events: none; }
+@keyframes go-ready { 0% { transform: scale(.96); } 60% { transform: scale(1.02); } }
+@keyframes shine { 0% { left: -40%; } 45%, 100% { left: 130%; } }
+.inicio-preg .sum-chev { transition: transform .25s var(--spring); }
+
+/* ---------- Checklist: avance ---------- */
+.run-progress { height: 4px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
+.run-progress span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), #6fd19f); transition: width .5s var(--spring); }
+.step:not(.s-pend):not(.s-fin) { animation: step-pop .4s var(--spring); }
+@keyframes step-pop { 0% { transform: scale(.7); } 70% { transform: scale(1.08); } }
+.step.is-current { transition: box-shadow .2s, transform .2s var(--spring); }
+.step.s-prob { animation: shake .4s ease; }
+@keyframes shake { 20%, 60% { transform: translateX(-3px); } 40%, 80% { transform: translateX(3px); } }
+.q-card.has-problem { animation: shake .4s ease; }
+.save-dot { transition: background .25s, color .25s; }
+.save-dot.is-saving::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: currentColor; margin-right: 5px; vertical-align: 1px; animation: blink .8s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+
+/* ---------- Estrellas ---------- */
+/* Vista previa al pasar el dedo/ratón: se iluminan hasta la estrella señalada */
+@media (hover: hover) {
+  .rate-stars:has(.rate-star:nth-child(1):hover) .rate-star:nth-child(-n+1) path,
+  .rate-stars:has(.rate-star:nth-child(2):hover) .rate-star:nth-child(-n+2) path,
+  .rate-stars:has(.rate-star:nth-child(3):hover) .rate-star:nth-child(-n+3) path,
+  .rate-stars:has(.rate-star:nth-child(4):hover) .rate-star:nth-child(-n+4) path,
+  .rate-stars:has(.rate-star:nth-child(5):hover) .rate-star:nth-child(-n+5) path { fill: #f7cd63; stroke: #d99a0b; }
+}
+.rate-star .star-ic { transition: transform .2s var(--spring); }
+.rate-star:hover .star-ic { transform: scale(1.08) rotate(-4deg); }
+.rate-star.is-on .star-ic { animation: star-pop .35s var(--spring) backwards; }
+.rate-star.is-on:nth-child(2) .star-ic { animation-delay: 40ms; }
+.rate-star.is-on:nth-child(3) .star-ic { animation-delay: 80ms; }
+.rate-star.is-on:nth-child(4) .star-ic { animation-delay: 120ms; }
+.rate-star.is-on:nth-child(5) .star-ic { animation-delay: 160ms; }
+@keyframes star-pop { 0% { transform: scale(.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.rate-label { transition: color .2s; }
+.rate-label.t-done, .rate-label.t-danger { animation: label-in .3s var(--ease-out); }
+@keyframes label-in { from { opacity: 0; transform: translateY(4px); } }
+/* Destello con 5 estrellas */
+.rate { position: relative; }
+.rate.is-burst::after { content: '✨'; position: absolute; right: 14px; top: 6px; font-size: 22px; animation: burst .9s ease-out forwards; pointer-events: none; }
+.rate.is-burst { animation: glow .9s ease-out; }
+@keyframes burst { 0% { opacity: 0; transform: scale(.4) translateY(6px); } 30% { opacity: 1; transform: scale(1.3) translateY(-4px); } 100% { opacity: 0; transform: scale(1) translateY(-18px); } }
+@keyframes glow { 0% { box-shadow: 0 0 0 0 rgba(242, 176, 30, .55); } 100% { box-shadow: 0 0 0 14px rgba(242, 176, 30, 0); } }
+.na-btn.is-on { animation: check-pop .3s var(--spring); }
+
+/* ---------- Fotos ---------- */
+.thumb { animation: thumb-in .35s var(--spring) backwards; }
+@keyframes thumb-in { from { opacity: 0; transform: scale(.7); } }
+.thumb img { transition: transform .25s; }
+.thumb:hover img { transform: scale(1.06); }
+.cam-btn { transition: transform .12s, background .15s, box-shadow .2s; }
+
+/* ---------- Siguiente listo ---------- */
+.run-next.is-ready { animation: ready-pulse 1.8s ease-in-out .3s infinite; }
+.run-next.is-ready .ic { animation: nudge 1.2s ease-in-out infinite; }
+@keyframes ready-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(28, 27, 24, .35); } 50% { box-shadow: 0 0 0 7px rgba(28, 27, 24, 0); } }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+
+/* ---------- Pista "desliza" (primera vez) ---------- */
+.swipe-hint { position: fixed; left: 50%; bottom: calc(110px + var(--safe-b, 0px)); transform: translateX(-50%); z-index: 40; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 20px; border: 0; border-radius: 16px; background: rgba(28, 27, 24, .88); color: #fff; font-size: 13px; box-shadow: var(--shadow-pop); animation: hint-in .4s var(--spring); cursor: pointer; }
+.swipe-hint b { font-size: 14px; }
+.swipe-hint span:last-child { opacity: .75; }
+.swipe-hand { font-size: 28px; animation: swipe 1.4s ease-in-out infinite; }
+@keyframes hint-in { from { opacity: 0; transform: translate(-50%, 16px) scale(.95); } }
+@keyframes swipe { 0%, 100% { transform: translateX(18px) rotate(10deg); } 50% { transform: translateX(-18px) rotate(-10deg); } }
+
+/* ---------- Éxito al finalizar ---------- */
+.exito { position: fixed; inset: 0; z-index: 65; display: grid; place-items: center; background: rgba(246, 245, 242, .86); backdrop-filter: blur(6px); animation: fade-in .25s ease-out; }
+.exito-card { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-dlg); animation: exito-in .5s var(--spring); text-align: center; }
+.exito-card h2 { font-size: 20px; font-weight: 700; margin-top: 6px; }
+.exito-pct { font-size: 44px; font-weight: 700; letter-spacing: -.03em; color: var(--accent); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.exito-check { width: 76px; height: 76px; }
+.exito-check circle { fill: var(--done-bg); stroke: var(--st-done); stroke-width: 2.5; stroke-dasharray: 160; stroke-dashoffset: 160; animation: draw .6s ease-out forwards; }
+.exito-check path { fill: none; stroke: var(--st-done); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw .35s ease-out .5s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes exito-in { from { opacity: 0; transform: scale(.85) translateY(10px); } }
+@keyframes fade-in { from { opacity: 0; } }
+
+/* ---------- Cargas ---------- */
+.skel { display: flex; flex-direction: column; gap: 12px; padding: 4px 0; }
+.skel-line, .skel-card { border-radius: 10px; background: linear-gradient(90deg, var(--surface-3) 0%, var(--surface-2) 40%, var(--surface-3) 80%); background-size: 200% 100%; animation: shimmer 1.2s linear infinite, fade-in .3s ease-out; }
+.skel-line { height: 14px; }
+.skel-line.h24 { height: 24px; }
+.skel-line.w40 { width: 40%; }
+.skel-line.w70 { width: 70%; margin-bottom: 6px; }
+.skel-card { height: 92px; border-radius: 14px; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.boot { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.boot-mark { width: 44px; height: 44px; border-radius: 11px; padding: 9px 9px 10px; gap: 4px; }
+.boot-mark i { width: 5px; animation: bars 1s ease-in-out infinite; transform-origin: bottom; }
+.boot-mark i:nth-child(2) { animation-delay: .12s; }
+.boot-mark i:nth-child(3) { animation-delay: .24s; }
+.boot-mark i:nth-child(1) { height: 9px; } .boot-mark i:nth-child(2) { height: 15px; } .boot-mark i:nth-child(3) { height: 21px; }
+@keyframes bars { 50% { transform: scaleY(.5); } }
+
+/* ---------- Avisos y hojas ---------- */
+.toast { transition: opacity .2s, transform .3s var(--spring); }
+.toast.is-on { animation: toast-bounce .4s var(--spring); }
+@keyframes toast-bounce { from { transform: translate(-50%, 16px) scale(.96); } }
+.sheet-backdrop .sheet > * { animation: sug-in .3s var(--ease-out) backwards; }
+.sheet-backdrop .sheet > :nth-child(2) { animation-delay: 40ms; }
+.sheet-backdrop .sheet > :nth-child(3) { animation-delay: 80ms; }
+.sheet-backdrop .sheet > :nth-child(4) { animation-delay: 120ms; }
+.dlg[open] { animation: dlg-up .28s var(--ease-out); }
+@keyframes dlg-up { from { opacity: 0; transform: translateY(24px); } }
+
+/* ---------- Tableros ---------- */
+.kpi-v { animation: label-in .4s var(--ease-out) backwards; }
+.kpi:nth-child(2) .kpi-v { animation-delay: 60ms; }
+.kpi:nth-child(3) .kpi-v { animation-delay: 120ms; }
+.kpi:nth-child(4) .kpi-v { animation-delay: 180ms; }
+.rank .bar > span { animation: bar-grow 1s var(--ease-out) backwards; }
+.tr { transition: background .15s; }
+a.tr:active { background: var(--surface-3); }
+
+/* ---------- Menos movimiento si el sistema lo pide ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

@@ -85,8 +85,8 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
                 {q.trim() && (
                   sugerencias.length ? (
                     <div className="pick-list sugerencias" role="listbox" aria-label="Tiendas encontradas">
-                      {sugerencias.slice(0, MAX).map(t => (
-                        <button key={t.id} type="button" role="option" aria-selected={false} className="pick" onClick={() => elegir(t.id)}>
+                      {sugerencias.slice(0, MAX).map((t, i) => (
+                        <button key={t.id} type="button" role="option" aria-selected={false} className="pick" style={{ ['--i' as string]: i }} onClick={() => elegir(t.id)}>
                           <span className="pick-main"><b>{t.nombre}</b><span className="mono">CR {t.cr}{t.plaza ? ` · ${etiquetaPlaza(t.plaza)}` : ''}</span>{t.ro && <span className="muted">RO {t.ro}</span>}</span>
                           <span className="pick-side">
                             {t.borradorId ? <span className="state warn">En curso</span> : t.ultima ? <><PctTag value={t.ultima.porcentaje} /><span className="muted">{fmtDate(t.ultima.fecha, { day: 'numeric', month: 'short' })}</span></> : <span className="muted">Sin evaluar</span>}
@@ -125,7 +125,7 @@ export default function InicioView({ checklist, preguntas, tiendas, puedeEvaluar
           {tienda ? <><span className="muted">Tienda seleccionada</span><b>{tienda.nombre}</b><span className="mono">CR {tienda.cr}</span></> : <span className="muted">Selecciona una tienda para comenzar</span>}
         </div>
         {puedeEvaluar
-          ? <button className="btn btn-primary btn-lg" type="button" disabled={!tienda || busy} onClick={iniciar}>
+          ? <button className={`btn btn-primary btn-lg inicio-go ${tienda ? 'is-ready' : ''}`} type="button" disabled={!tienda || busy} onClick={iniciar}>
               <Icon n={tienda?.borradorId ? 'edit' : 'check'} /><span className="step-n inv">3</span>{busy ? 'Abriendo…' : tienda?.borradorId ? 'Continuar checklist' : 'Iniciar checklist'}
             </button>
           : <span className="state">Tu perfil es solo de consulta</span>}

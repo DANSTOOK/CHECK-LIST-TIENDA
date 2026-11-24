@@ -35,7 +35,7 @@ export default function EvaluacionView({ ev, puedeEditar, anterior }: Evaluacion
       <section className="overview res-overview">
         <div className="res-main">
           <span className="kpi-l">Cumplimiento</span>
-          <PctTag value={ev.porcentaje} big />
+          <PctTag value={ev.porcentaje} big animado />
           <Trend actual={ev.porcentaje} anterior={anterior?.porcentaje} />
           {anterior && <span className="muted res-prev">Anterior: {anterior.porcentaje == null ? '—' : `${anterior.porcentaje}%`} · <Link className="link" href={`/evaluaciones/${anterior.id}`}>{anterior.folio}</Link></span>}
         </div>
