@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { api, Dialog, Empty, Icon, PctTag, Trend, useToast, useAppRouter } from '@/components/ui';
 import { fmtDate, tone } from '@/lib/format';
+import { PLAZAS, etiquetaPlaza } from '@/lib/plazas';
 
 export interface TiendaRow {
   id: string; cr: string; nombre: string; ciudad: string | null; plaza: string | null; estado: string | null; region: string | null; ro: string | null; activa: boolean;
@@ -32,9 +33,11 @@ export default function TiendasView({ tiendas, admin, puedeEvaluar }: { tiendas:
   const [limit, setLimit] = useState(PAGE);
   const [form, setForm] = useState<Form | null>(null);
   const [imp, setImp] = useState<string | null>(null);
+  const [impPlaza, setImpPlaza] = useState('');
   const [busy, setBusy] = useState('');
 
   const opts = (k: 'plaza' | 'estado' | 'region' | 'ro') => [...new Set(tiendas.map(t => t[k]).filter(Boolean) as string[])].sort();
+  const plazasOpts = [...new Set([...PLAZAS, ...opts('plaza')])];
   const activas = tiendas.filter(t => t.activa);
   const filtradas = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -72,7 +75,7 @@ export default function TiendasView({ tiendas, admin, puedeEvaluar }: { tiendas:
   };
   const importar = async () => {
     try {
-      const r = await api<{ creadas: number; actualizadas: number; errores: string[] }>(u('/api/tiendas/importar'), { body: { texto: imp } });
+      const r = await api<{ creadas: number; actualizadas: number; errores: string[] }>(u('/api/tiendas/importar'), { body: { texto: imp, plaza: impPlaza } });
       toast(`${r.creadas} tiendas nuevas, ${r.actualizadas} actualizadas${r.errores.length ? `, ${r.errores.length} filas con error` : ''}`, r.errores.length > 0);
       if (r.errores.length) console.warn(r.errores);
       setImp(null); router.refresh();
@@ -113,7 +116,7 @@ export default function TiendasView({ tiendas, admin, puedeEvaluar }: { tiendas:
       <div className="home-bar">
         <label className="search"><Icon n="search" /><input value={q} onChange={e => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Buscar por CR, nombre, ciudad o RO" aria-label="Buscar tienda" /></label>
         {opts('ro').length > 0 && <select className="sel" value={ro} onChange={e => setRo(e.target.value)} aria-label="RO"><option value="">Todos los RO</option>{opts('ro').map(o => <option key={o}>{o}</option>)}</select>}
-        {opts('plaza').length > 0 && <select className="sel" value={plaza} onChange={e => setPlaza(e.target.value)} aria-label="Plaza"><option value="">Todas las plazas</option>{opts('plaza').map(o => <option key={o}>{o}</option>)}</select>}
+        <select className="sel" value={plaza} onChange={e => setPlaza(e.target.value)} aria-label="Plaza"><option value="">Todas las plazas</option>{plazasOpts.map(o => <option key={o} value={o}>{etiquetaPlaza(o)}</option>)}</select>
         {opts('estado').length > 0 && <select className="sel" value={estado} onChange={e => setEstado(e.target.value)} aria-label="Estado"><option value="">Todos los estados</option>{opts('estado').map(o => <option key={o}>{o}</option>)}</select>}
         {opts('region').length > 0 && <select className="sel" value={region} onChange={e => setRegion(e.target.value)} aria-label="Región"><option value="">Todas las regiones</option>{opts('region').map(o => <option key={o}>{o}</option>)}</select>}
         <div className="seg" role="tablist">
@@ -184,10 +187,9 @@ export default function TiendasView({ tiendas, admin, puedeEvaluar }: { tiendas:
         <div className="grid-3">
           {F('cr', 'CR (Centro de Responsabilidad)', { required: true, placeholder: '50ABC', className: 'mono' })}
           <div className="span-2">{F('nombre', 'Nombre de la tienda', { required: true, placeholder: 'OXXO Ameyalli' })}</div>
-          {F('ciudad', 'Ciudad')}{F('plaza', 'Plaza', { list: 'dl-plaza' })}{F('estado', 'Estado', { list: 'dl-estado' })}{F('region', 'Región', { list: 'dl-region' })}<div className="span-2">{F('ro', 'RO (responsable de operación)', { list: 'dl-ro' })}</div>
+          {F('ciudad', 'Ciudad')}<label className="field">Plaza<select value={form?.plaza || ''} onChange={e => setForm(f => f && { ...f, plaza: e.target.value })}><option value="">Sin plaza</option>{plazasOpts.map(o => <option key={o} value={o}>{etiquetaPlaza(o)}</option>)}</select></label>{F('estado', 'Estado', { list: 'dl-estado' })}{F('region', 'Región', { list: 'dl-region' })}<div className="span-2">{F('ro', 'RO (responsable de operación)', { list: 'dl-ro' })}</div>
         </div>
-        <datalist id="dl-plaza">{opts('plaza').map(o => <option key={o} value={o} />)}</datalist>
-        <datalist id="dl-estado">{opts('estado').map(o => <option key={o} value={o} />)}</datalist>
+                <datalist id="dl-estado">{opts('estado').map(o => <option key={o} value={o} />)}</datalist>
         <datalist id="dl-ro">{opts('ro').map(o => <option key={o} value={o} />)}</datalist>
         <datalist id="dl-region">{opts('region').map(o => <option key={o} value={o} />)}</datalist>
       </Dialog>
@@ -195,6 +197,7 @@ export default function TiendasView({ tiendas, admin, puedeEvaluar }: { tiendas:
       <Dialog open={imp !== null} onClose={() => setImp(null)} title="Importar concentrado de tiendas" size="dlg-wide" onSubmit={importar}
         foot={<><button type="button" className="btn" onClick={() => setImp(null)}>Cancelar</button><button className="btn btn-primary" type="submit" disabled={!imp?.trim()}>Importar</button></>}>
         <p className="dlg-note">Copia las columnas desde Excel (incluyendo la fila de encabezados) y pégalas abajo, o elige un archivo CSV. Se reconocen las columnas <b>CR</b> (o CR TIENDA), <b>Nombre</b> (o Tienda), <b>Ciudad</b>, <b>Plaza</b>, <b>Estado</b>, <b>Región</b> y <b>RO</b> (o Nuevo RO). Si el CR ya existe, se actualiza solo con las columnas que traiga el archivo.</p>
+        <label className="field">Plaza de estas tiendas<select value={impPlaza} onChange={e => setImpPlaza(e.target.value)}><option value="">La que indique la columna Plaza del archivo</option>{PLAZAS.map(o => <option key={o} value={o}>{etiquetaPlaza(o)}</option>)}</select></label>
         <textarea className="paste-area" rows={10} value={imp ?? ''} onChange={e => setImp(e.target.value)} placeholder={'CR\tNombre\tCiudad\tPlaza\tEstado\tRegión\n50ABC\tOXXO Ameyalli\tTijuana\tTijuana Este\tBaja California\tNoroeste'} />
         <label className="btn btn-sm file-btn"><Icon n="upload" />Elegir archivo CSV<input type="file" accept=".csv,.txt,text/csv" hidden onChange={e => e.target.files?.[0] && leerArchivo(e.target.files[0])} /></label>
       </Dialog>

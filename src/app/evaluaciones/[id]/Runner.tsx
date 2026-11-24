@@ -139,7 +139,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
   };
   const descartar = async () => {
     if (!confirm('¿Descartar este checklist? Se borran sus respuestas y fotos.')) return;
-    try { await api(u(`/api/evaluaciones/${ev.id}`), { method: 'DELETE' }); router.push('/tiendas'); router.refresh(); }
+    try { await api(u(`/api/evaluaciones/${ev.id}`), { method: 'DELETE' }); router.push('/'); router.refresh(); }
     catch (e) { toast((e as Error).message, true); }
   };
 

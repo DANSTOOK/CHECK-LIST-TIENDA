@@ -12,7 +12,7 @@ export default function DashboardView({ f, plazas, ros, s, meses, ranking, porRo
       <header className="page-head">
         <div className="page-row">
           <div className="page-text"><h1>Dashboard</h1><p className="page-sub">Seguimiento del checklist operativo en tiendas</p></div>
-          <div className="page-actions"><Link className="btn" href="/evaluaciones"><Icon n="history" />Ver historial</Link><Link className="btn btn-primary" href="/tiendas"><Icon n="check" />Nuevo checklist</Link></div>
+          <div className="page-actions"><Link className="btn" href="/evaluaciones"><Icon n="history" />Ver historial</Link><Link className="btn btn-primary" href="/"><Icon n="check" />Nuevo checklist</Link></div>
         </div>
       </header>
 
@@ -22,7 +22,7 @@ export default function DashboardView({ f, plazas, ros, s, meses, ranking, porRo
         {ros.length > 0 && <label className="field">RO<select name="ro" defaultValue={f.ro ?? ''}><option value="">Todos</option>{ros.map(r => <option key={r}>{r}</option>)}</select></label>}
         {plazas.length > 0 && <label className="field">Plaza<select name="plaza" defaultValue={f.plaza ?? ''}><option value="">Todas</option>{plazas.map(p => <option key={p}>{p}</option>)}</select></label>}
         <button className="btn" type="submit"><Icon n="search" />Aplicar</button>
-        <Link className="btn btn-ghost" href="/">Últimos 6 meses</Link>
+        <Link className="btn btn-ghost" href="/dashboard">Últimos 6 meses</Link>
       </form>
 
       <div className="kpis k5">

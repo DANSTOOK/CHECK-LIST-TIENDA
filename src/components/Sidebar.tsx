@@ -45,7 +45,8 @@ export default function Sidebar({ user, borradores, entra, version }: { user: Cu
       </Link>
 
       <nav className="nav-list" aria-label="Secciones">
-        {nav('/', 'chart', 'Dashboard')}
+        {nav('/', 'check', 'Checklist')}
+        {nav('/dashboard', 'chart', 'Dashboard')}
         {nav('/tiendas', 'store', 'Tiendas')}
         {nav('/evaluaciones', 'history', 'Historial')}
         {user.rol === 'admin' && <>

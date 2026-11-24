@@ -36,7 +36,9 @@ function splitLine(line: string, sep: string) {
 }
 
 export const POST = handler(async req => {
-  const { texto } = (await req.json()) as { texto?: string };
+  // plaza: se asigna a todas las tiendas del archivo si no trae columna "Plaza" (los concentrados vienen por plaza).
+  const { texto, plaza } = (await req.json()) as { texto?: string; plaza?: string };
+  const plazaArchivo = plaza?.trim() || null;
   const lines = (texto || '').replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
   if (lines.length < 2) return fail('Incluye la fila de encabezados y al menos una tienda');
   const sep = lines[0].includes('\t') ? '\t' : lines[0].split(';').length > lines[0].split(',').length ? ';' : ',';
@@ -60,11 +62,11 @@ export const POST = handler(async req => {
       const cr = get('cr')?.toUpperCase();
       const nombre = get('nombre');
       if (!cr || !nombre) { errores.push(`Fila ${n + 2}: falta CR o nombre`); continue; }
-      const data = { nombre, ciudad: get('ciudad'), plaza: get('plaza'), estado: get('estado'), region: get('region'), ro: get('ro') };
+      const data = { nombre, ciudad: get('ciudad'), plaza: get('plaza') ?? plazaArchivo, estado: get('estado'), region: get('region'), ro: get('ro') };
       const id = existentes.get(cr);
       if (id) {
         // Solo se actualizan las columnas que trae el archivo (no se borra lo capturado a mano).
-        const parcial = Object.fromEntries(Object.entries(data).filter(([k]) => k === 'nombre' || col[k] !== undefined));
+        const parcial = Object.fromEntries(Object.entries(data).filter(([k]) => k === 'nombre' || col[k] !== undefined || (k === 'plaza' && plazaArchivo)));
         await tx.updateTable('tiendas').set({ ...parcial, activa: true, updated_at: now() }).where('id', '=', id).execute();
         actualizadas++;
       } else {

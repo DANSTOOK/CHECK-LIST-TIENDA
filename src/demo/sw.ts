@@ -34,6 +34,7 @@ import * as usuarioId from '@/app/api/usuarios/[id]/route';
 
 import { loadShell } from '@/lib/vistas/shell';
 import { loadDashboard } from '@/lib/vistas/dashboard';
+import { loadInicio } from '@/lib/vistas/inicio';
 import { loadHistorial } from '@/lib/vistas/historial';
 import { loadTiendas } from '@/lib/vistas/tiendas';
 import { loadTienda } from '@/lib/vistas/tienda';
@@ -72,6 +73,7 @@ const RUTAS: [RegExp, Mod][] = [
 const sp = (q: URLSearchParams) => Object.fromEntries(q.entries());
 const VISTAS: Record<string, (q: URLSearchParams) => Promise<unknown>> = {
   shell: () => loadShell(),
+  inicio: () => loadInicio(),
   dashboard: q => loadDashboard(sp(q)),
   historial: q => loadHistorial(sp(q)),
   tiendas: () => loadTiendas(),
