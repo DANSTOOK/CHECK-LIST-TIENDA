@@ -26,7 +26,7 @@ export function DemoShell({ children }: { children: ReactNode }) {
   const [error, setError] = useState('');
   const load = useCallback(() => api<ShellData>(u('/api/vista/shell')).then(setData).catch(e => setError(String(e.message || e))), []);
   useEffect(() => {
-    if (!('serviceWorker' in navigator)) { setError('Este navegador no permite la versión demo (service workers).'); return; }
+    if (!('serviceWorker' in navigator)) { setError('Este navegador no permite la versión de prueba (service workers).'); return; }
     const first = !navigator.serviceWorker.controller;
     navigator.serviceWorker.register(u('/sw.js'), { scope: u('/') }).catch(e => setError(String(e)));
     // La primera visita (o un enlace directo) se recarga una vez ya con la "API" del demo activa.
@@ -36,11 +36,11 @@ export function DemoShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('ckl-refresh', load);
   }, [load]);
   if (error) return <div className="login"><div className="login-card panel"><Icon n="alert" /><p>{error}</p></div></div>;
-  if (!data) return <div className="login"><p className="muted">Preparando la demo…</p></div>;
+  if (!data) return <div className="login"><p className="muted">Preparando la aplicación…</p></div>;
   return (
     <>
       <Shell {...data}>{children}</Shell>
-      <div className="demo-badge" title="Los datos se guardan solo en este navegador">DEMO · datos locales</div>
+      <div className="demo-badge" title="Los datos se guardan solo en este navegador">Prueba · datos en este navegador</div>
     </>
   );
 }

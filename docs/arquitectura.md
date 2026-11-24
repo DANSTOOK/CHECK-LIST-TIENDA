@@ -56,7 +56,7 @@ CKL/
 │  ├─ cli.ts                  npm run setup | db:migrate | db:seed | db:demo
 │  ├─ migrations.ts           Migraciones (SQLite y PostgreSQL)
 │  ├─ seed.ts                 Checklist inicial (5 preguntas del PPTX) y categorías
-│  └─ demo.ts                 Datos DEMO-## para probar tableros
+│  └─ demo.ts                 Tiendas de ejemplo Oxxo 001…006 para probar tableros
 ├─ database/postgres/001_init.sql   Script SQL puro para el DBA
 ├─ docs/                      Arquitectura, manual de usuario
 ├─ public/img/                tienda.png (del planificador) · logo.png (opcional, para el PDF)

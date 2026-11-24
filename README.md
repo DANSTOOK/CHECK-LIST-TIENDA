@@ -14,7 +14,7 @@ Cada push a `main` publica una versión **demo** en GitHub Pages (`.github/workf
 **https://danstook.github.io/CHECK-LIST-TIENDA/**
 
 - Es la misma app, compilada como sitio estático (`npm run build:demo`). Como Pages no ejecuta servidor, la API, la base de datos (SQLite en WebAssembly), las fotos y el PDF corren **dentro del navegador** en un *service worker* (`src/demo/sw.ts`), con los mismos route handlers y consultas que el servidor.
-- Los datos se guardan **solo en el navegador de cada persona** (IndexedDB): cada quien ve sus propias pruebas. Empieza con el checklist de 5 preguntas y 6 tiendas `DEMO-##` con 6 meses de evaluaciones de ejemplo. El concentrado real de tiendas **no** se publica.
+- Los datos se guardan **solo en el navegador de cada persona** (IndexedDB): cada quien ve sus propias pruebas. Empieza con el checklist de 5 preguntas y 6 tiendas de ejemplo (`Oxxo 001` a `Oxxo 006`) con 6 meses de evaluaciones de ejemplo. El concentrado real de tiendas **no** se publica.
 - Funciona igual en el celular (cámara incluida). El correo se genera como `.eml` para Outlook Desktop; el borrador con Microsoft Graph solo existe en la versión con servidor.
 - Probar localmente antes de publicar:
   ```bash
@@ -51,7 +51,7 @@ Abrir <http://localhost:3100>, elegir **Administrador** e importar las tiendas e
 
 Desde un celular en la misma red: `http://<IP de la PC>:3100` (la IP aparece al arrancar como *Network*).
 
-> **Datos de demostración** (opcional): `npm run db:demo` crea 6 tiendas `DEMO-##` con 6 meses de evaluaciones para ver el dashboard. Se quitan con `npm run db:demo -- --clear`.
+> **Datos de demostración** (opcional): `npm run db:demo` crea 6 tiendas de ejemplo `Oxxo 001…006` con 6 meses de evaluaciones para ver el dashboard. Se quitan con `npm run db:demo -- --clear`.
 
 ### 2. Producción
 

@@ -105,7 +105,7 @@ async function atender(req: Request, path: string, query: URLSearchParams): Prom
     if (req.method !== 'GET') await guardar();
     return res;
   }
-  return fail('Ruta no disponible en la demo', 404);
+  return fail('Ruta no disponible en la versión de prueba', 404);
 }
 
 self.addEventListener('install', () => { void self.skipWaiting(); });
@@ -124,7 +124,7 @@ self.addEventListener('fetch', e => {
   if (path.startsWith('/api/')) {
     e.respondWith(atender(e.request, path, url.searchParams).catch(err => {
       console.error(err);
-      return fail(err instanceof Error ? err.message : 'Error en la demo', 500);
+      return fail(err instanceof Error ? err.message : 'Error en la versión de prueba', 500);
     }));
     return;
   }
