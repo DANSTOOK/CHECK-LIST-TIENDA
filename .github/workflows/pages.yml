@@ -1,0 +1,47 @@
+name: Publicar demo en GitHub Pages
+
+# Cada push a main publica la versión DEMO (estática) para pruebas.
+# La demo corre completa en el navegador: la API, SQLite (WebAssembly), fotos y PDF
+# viven en un service worker y los datos se guardan en cada navegador.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Compilar demo estática
+        run: npm run build:demo -- "/${{ github.event.repository.name }}"
+      - uses: actions/configure-pages@v6
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

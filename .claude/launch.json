@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ckl",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3100
+    },
+    {
+      "name": "demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serve-demo.mjs",
+        "3200"
+      ],
+      "port": 3200,
+      "url": "http://localhost:3200"
+    }
+  ]
+}

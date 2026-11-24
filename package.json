@@ -1,0 +1,41 @@
+{
+  "name": "ckl-checklist-operativo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Checklist operativo de tiendas OXXO: evaluaciones con evidencias, historial, dashboard, PDF y correo.",
+  "scripts": {
+    "dev": "node node_modules/next/dist/bin/next dev -p 3100",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start -p 3100",
+    "setup": "node node_modules/tsx/dist/cli.mjs db/cli.ts setup",
+    "db:migrate": "node node_modules/tsx/dist/cli.mjs db/cli.ts migrate",
+    "db:seed": "node node_modules/tsx/dist/cli.mjs db/cli.ts seed",
+    "db:demo": "node node_modules/tsx/dist/cli.mjs db/cli.ts demo",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "build:demo": "node scripts/build-demo.mjs"
+  },
+  "dependencies": {
+    "@azure/storage-blob": "12.34.0",
+    "@next/swc-wasm-nodejs": "15.5.29",
+    "kysely": "0.27.6",
+    "next": "15.5.29",
+    "next-auth": "4.24.15",
+    "pdf-lib": "1.17.1",
+    "pg": "8.23.1",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "recharts": "2.15.4"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/pg": "8.23.1",
+    "@types/react": "19.1.17",
+    "@types/react-dom": "19.1.11",
+    "@types/sql.js": "1.16.0",
+    "buffer": "6.0.3",
+    "esbuild": "0.28.2",
+    "sql.js": "1.17.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

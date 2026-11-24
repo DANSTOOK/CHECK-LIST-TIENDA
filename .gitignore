@@ -1,0 +1,12 @@
+node_modules/
+.next/
+storage/
+data/
+data/
+.env
+*.tsbuildinfo
+next-env.d.ts
+out/
+.api-off/
+public/sw.js
+public/sql-wasm.wasm
