@@ -13,6 +13,7 @@ import { cargarEvaluacion, destinatariosPara, evaluacionAnterior, type Evaluacio
 import { asunto, construirEml, crearBorradorGraph, cuerpoHtml, type Adjunto } from '@/lib/mail';
 import { generarPdf } from '@/lib/pdf';
 import { storage } from '@/lib/storage';
+import { nombreXml, xmlEvaluacion } from '@/lib/xml';
 
 type Ctx = { params: Promise<{ id: string }> };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,7 +36,11 @@ export const GET = handler<Ctx>(async (req, { params }) => {
 });
 
 async function adjuntos(ev: EvaluacionFull, anterior: { porcentaje: number | null } | null): Promise<Adjunto[]> {
-  const out: Adjunto[] = [{ nombre: `Checklist_${ev.tienda.cr}_${ev.folio}.pdf`, mime: 'application/pdf', data: await generarPdf(ev, anterior) }];
+  const out: Adjunto[] = [
+    { nombre: `Checklist_${ev.tienda.cr}_${ev.folio}.pdf`, mime: 'application/pdf', data: await generarPdf(ev, anterior) },
+    // XML para quien valida y da seguimiento con el RO (se abre en Excel).
+    { nombre: nombreXml(`Seguimiento_${ev.tienda.cr}_${ev.folio}`), mime: 'application/xml', data: Buffer.from(xmlEvaluacion(ev), 'utf8') },
+  ];
   let n = 0;
   for (const [i, r] of ev.respuestas.entries()) {
     for (const f of r.evidencias) {

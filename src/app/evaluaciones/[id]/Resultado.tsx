@@ -86,7 +86,7 @@ export function MailButton({ id }: { id: string }) {
           {p?.graph && <button className="btn btn-primary" type="button" onClick={graph} disabled={!!busy}><Icon n="send" />{busy === 'graph' ? 'Creando borrador…' : 'Crear borrador en Outlook'}</button>}
         </div>}>
         {p && <>
-          <p className="dlg-note">Destinatarios sugeridos: generales{p.areas.length ? <> + áreas con hallazgos (<b>{p.areas.join(', ')}</b>)</> : ''}. Puedes ajustarlos; se separan con punto y coma. Se adjunta el PDF y las fotos.</p>
+          <p className="dlg-note">Destinatarios sugeridos: generales{p.areas.length ? <> + áreas con hallazgos (<b>{p.areas.join(', ')}</b>)</> : ''}. Puedes ajustarlos; se separan con punto y coma. Se adjuntan el PDF, el XML de seguimiento y las fotos.</p>
           <div className="grid-2">
             <label className="field">Para<input value={to} onChange={e => setTo(e.target.value)} placeholder="correo@oxxo.com; …" /></label>
             <label className="field">CC<input value={cc} onChange={e => setCc(e.target.value)} /></label>

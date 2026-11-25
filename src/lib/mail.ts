@@ -70,7 +70,7 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
   <h3 style="font-size:15px;margin:20px 0 6px;">Detalle por pregunta</h3>
   <table style="border-collapse:collapse;width:100%;"><tr style="background:#f1f0ec;">
     <th style="${td}text-align:left;">#</th><th style="${td}text-align:left;">Pregunta</th><th style="${td}text-align:left;">Resultado</th><th style="${td}text-align:left;">Comentario</th><th style="${td}">Fotos</th></tr>${filas}</table>
-  <p style="font-size:12.5px;color:#6d6a62;margin-top:16px;">Se adjunta el reporte PDF con ${fotosTotal} evidencia${fotosTotal === 1 ? '' : 's'} fotográfica${fotosTotal === 1 ? '' : 's'}${fotosTotal ? ' y las fotografías originales' : ''}.${appUrl ? ` Consulta el detalle en <a href="${esc(appUrl)}">${esc(appUrl)}</a>.` : ''}</p>
+  <p style="font-size:12.5px;color:#6d6a62;margin-top:16px;">Se adjunta el reporte PDF, el XML de seguimiento (se abre en Excel) con ${fotosTotal} evidencia${fotosTotal === 1 ? '' : 's'} fotográfica${fotosTotal === 1 ? '' : 's'}${fotosTotal ? ' y las fotografías originales' : ''}.${appUrl ? ` Consulta el detalle en <a href="${esc(appUrl)}">${esc(appUrl)}</a>.` : ''}</p>
   <p style="font-size:14px;">Saludos.</p></div>`;
 }
 

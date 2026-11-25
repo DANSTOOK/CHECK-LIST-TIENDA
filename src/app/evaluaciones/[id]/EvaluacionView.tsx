@@ -26,6 +26,7 @@ export default function EvaluacionView({ ev, puedeEditar, anterior }: Evaluacion
             <div className="page-actions">
               <a className="btn" href={u(`/api/evaluaciones/${ev.id}/pdf?ver`)} target="_blank" rel="noreferrer"><Icon n="pdf" />Ver PDF</a>
               <a className="btn" href={u(`/api/evaluaciones/${ev.id}/pdf`)}><Icon n="download" />Descargar PDF</a>
+              <a className="btn" href={u(`/api/evaluaciones/${ev.id}/xml`)} title="Archivo XML que se abre en Excel, con columnas para dar seguimiento con el RO"><Icon n="table" />XML de seguimiento</a>
               <MailButton id={ev.id} />
             </div>
           )}

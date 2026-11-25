@@ -22,6 +22,8 @@ import * as finalizar from '@/app/api/evaluaciones/[id]/finalizar/route';
 import * as evidenciasPost from '@/app/api/evaluaciones/[id]/evidencias/route';
 import * as pdf from '@/app/api/evaluaciones/[id]/pdf/route';
 import * as correo from '@/app/api/evaluaciones/[id]/correo/route';
+import * as xmlEval from '@/app/api/evaluaciones/[id]/xml/route';
+import * as exportar from '@/app/api/evaluaciones/exportar/route';
 import * as evidenciaId from '@/app/api/evidencias/[id]/route';
 import * as categorias from '@/app/api/categorias/route';
 import * as categoriaId from '@/app/api/categorias/[id]/route';
@@ -54,11 +56,13 @@ const RUTAS: [RegExp, Mod][] = [
   [/^\/api\/tiendas\/importar$/, importar],
   [/^\/api\/tiendas\/(?<id>[^/]+)$/, tiendaId],
   [/^\/api\/evaluaciones$/, evaluaciones],
+  [/^\/api\/evaluaciones\/exportar$/, exportar],
   [/^\/api\/evaluaciones\/(?<id>[^/]+)$/, evaluacionId],
   [/^\/api\/evaluaciones\/(?<id>[^/]+)\/finalizar$/, finalizar],
   [/^\/api\/evaluaciones\/(?<id>[^/]+)\/evidencias$/, evidenciasPost],
   [/^\/api\/evaluaciones\/(?<id>[^/]+)\/pdf$/, pdf],
   [/^\/api\/evaluaciones\/(?<id>[^/]+)\/correo$/, correo],
+  [/^\/api\/evaluaciones\/(?<id>[^/]+)\/xml$/, xmlEval],
   [/^\/api\/evidencias\/(?<id>[^/]+)$/, evidenciaId],
   [/^\/api\/categorias$/, categorias],
   [/^\/api\/categorias\/(?<id>[^/]+)$/, categoriaId],
