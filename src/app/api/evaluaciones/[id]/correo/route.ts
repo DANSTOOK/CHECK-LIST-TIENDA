@@ -2,7 +2,7 @@
  * Correo de resultados.
  *  GET  -> vista previa: destinatarios sugeridos, asunto y cuerpo HTML.
  *  POST -> { modo: 'eml' | 'graph', to, cc, asunto }
- *          eml:   descarga un .eml listo para abrir en Outlook Desktop (PDF + fotos adjuntos)
+ *          eml:   descarga un .eml para abrir en Outlook o compartir (fotos dentro del cuerpo; PDF y Excel adjuntos)
  *          graph: crea el borrador en el buzón (Outlook Web/Desktop) y devuelve su enlace
  */
 import { getToken } from 'next-auth/jwt';
@@ -10,14 +10,16 @@ import type { NextRequest } from 'next/server';
 import { fail, handler, ok } from '@/lib/api';
 import { entraEnabled } from '@/lib/auth';
 import { cargarEvaluacion, destinatariosPara, evaluacionAnterior, type EvaluacionFull } from '@/lib/evaluaciones';
-import { asunto, construirEml, crearBorradorGraph, cuerpoHtml, type Adjunto } from '@/lib/mail';
+import { asunto, cidFoto, construirEml, crearBorradorGraph, cuerpoHtml, type Adjunto } from '@/lib/mail';
 import { generarPdf } from '@/lib/pdf';
 import { storage } from '@/lib/storage';
-import { nombreXml, xmlEvaluacion } from '@/lib/xml';
+import { MIME_XLSX, nombreXlsx, xlsxEvaluacion } from '@/lib/xlsx';
 
 type Ctx = { params: Promise<{ id: string }> };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const appUrl = (req: Request, id: string) => `${process.env.NEXTAUTH_URL || new URL(req.url).origin}/evaluaciones/${id}`;
+/** Prefijo del sitio (en GitHub Pages /NOMBRE-DEL-REPO) tomado de la URL de la petición. */
+const prefijo = (req: Request) => { const p = new URL(req.url).pathname; return p.slice(0, p.indexOf('/api/')); };
+const appUrl = (req: Request, id: string) => `${process.env.NEXTAUTH_URL || new URL(req.url).origin + prefijo(req)}/evaluaciones/${id}`;
 
 async function load(id: string) {
   const ev = await cargarEvaluacion(id);
@@ -32,21 +34,22 @@ export const GET = handler<Ctx>(async (req, { params }) => {
   if (!d) return fail('Evaluación no encontrada', 404);
   if (d === 'borrador') return fail('Finaliza la evaluación antes de generar el correo', 409);
   const dest = await destinatariosPara(d.ev);
-  return ok({ ...dest, asunto: asunto(d.ev), html: cuerpoHtml(d.ev, d.anterior, appUrl(req, id)), graph: entraEnabled });
+  // En la vista previa las fotos se ven desde la app; en el correo van incrustadas.
+  return ok({ ...dest, asunto: asunto(d.ev), html: cuerpoHtml(d.ev, d.anterior, appUrl(req, id), fid => `${prefijo(req)}/api/evidencias/${fid}`), graph: entraEnabled });
 });
 
 async function adjuntos(ev: EvaluacionFull, anterior: { porcentaje: number | null } | null): Promise<Adjunto[]> {
   const out: Adjunto[] = [
     { nombre: `Checklist_${ev.tienda.cr}_${ev.folio}.pdf`, mime: 'application/pdf', data: await generarPdf(ev, anterior) },
-    // XML para quien valida y da seguimiento con el RO (se abre en Excel).
-    { nombre: nombreXml(`Seguimiento_${ev.tienda.cr}_${ev.folio}`), mime: 'application/xml', data: Buffer.from(xmlEvaluacion(ev), 'utf8') },
+    // Excel para quien valida y da seguimiento con el RO (cada punto con sus fotos).
+    { nombre: nombreXlsx(`Seguimiento_${ev.tienda.cr}_${ev.folio}`), mime: MIME_XLSX, data: Buffer.from(await xlsxEvaluacion(ev)) },
   ];
-  let n = 0;
+  // Fotos dentro del cuerpo, debajo de su pregunta (cid:)
   for (const [i, r] of ev.respuestas.entries()) {
-    for (const f of r.evidencias) {
-      n++;
-      const ext = f.mime === 'image/png' ? 'png' : f.mime === 'image/webp' ? 'webp' : 'jpg';
-      try { out.push({ nombre: `${ev.tienda.cr}_P${i + 1}_${n}.${ext}`, mime: f.mime, data: await storage().get(f.ruta) }); } catch { /* omitida */ }
+    for (const [k, f] of r.evidencias.entries()) {
+      if (f.mime !== 'image/jpeg' && f.mime !== 'image/png') continue;
+      const ext = f.mime === 'image/png' ? 'png' : 'jpg';
+      try { out.push({ nombre: `${ev.tienda.cr}_P${i + 1}_${k + 1}.${ext}`, mime: f.mime, data: await storage().get(f.ruta), inlineId: cidFoto(f.id) }); } catch { /* omitida */ }
     }
   }
   return out;
@@ -61,7 +64,7 @@ export const POST = handler<Ctx>(async (req, { params }) => {
   const clean = (xs?: string[]) => (xs ?? []).map(x => x.trim()).filter(x => EMAIL.test(x));
   const msg = {
     to: clean(b.to), cc: clean(b.cc), subject: b.asunto?.trim() || asunto(d.ev),
-    html: cuerpoHtml(d.ev, d.anterior, appUrl(req, id)), adjuntos: await adjuntos(d.ev, d.anterior),
+    html: cuerpoHtml(d.ev, d.anterior, appUrl(req, id), fid => `cid:${cidFoto(fid)}`), adjuntos: await adjuntos(d.ev, d.anterior),
   };
 
   if (b.modo === 'graph') {

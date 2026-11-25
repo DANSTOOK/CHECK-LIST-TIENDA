@@ -24,7 +24,7 @@ export default function HistorialView({ f, rows, usuarios, plazas, ros, s, meses
         {plazas.length > 0 && <label className="field">Plaza<select name="plaza" defaultValue={f.plaza ?? ''}><option value="">Todas</option>{plazas.map(p => <option key={p}>{p}</option>)}</select></label>}
         <button className="btn btn-primary" type="submit"><Icon n="search" />Filtrar</button>
         <Link className="btn btn-ghost" href="/evaluaciones">Limpiar</Link>
-        <a className="btn" href={u(`/api/evaluaciones/exportar?${new URLSearchParams(Object.entries(f).filter(([, v]) => v) as [string, string][])}`)} title="Resumen, hallazgos y totales por RO en un XML que se abre en Excel"><Icon n="table" />Exportar XML de seguimiento</a>
+        <a className="btn" href={u(`/api/evaluaciones/exportar?${new URLSearchParams(Object.entries(f).filter(([, v]) => v) as [string, string][])}`)} title="Excel con resumen, cada hallazgo con sus fotos y totales por RO"><Icon n="table" />Exportar Excel de seguimiento</a>
       </form>
 
       <div className="kpis">

@@ -55,7 +55,7 @@ export function MailButton({ id }: { id: string }) {
       a.download = `${asunto.replace(/[\\/:*?"<>|]+/g, '').slice(0, 90)}.eml`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-      toast('Ábrelo con Outlook: queda como correo nuevo con el PDF y las fotos adjuntos');
+      toast('Correo descargado: ábrelo con Outlook para enviarlo o compártelo tal cual');
     } catch (e) { toast((e as Error).message, true); }
     setBusy('');
   };
@@ -81,12 +81,12 @@ export function MailButton({ id }: { id: string }) {
       <Dialog open={!!p} onClose={() => setP(null)} title="Correo de resultados" size="dlg-mail"
         foot={<div className="mail-foot-in">
           <button className="btn" type="button" onClick={copiar} title="Copia el resumen con formato para pegarlo en cualquier correo">Copiar resumen</button>
-          <button className="btn" type="button" onClick={eml} disabled={!!busy} title="Descarga un correo listo; al abrirlo en Outlook Desktop queda como mensaje nuevo con adjuntos">
-            <Icon n="download" />{busy === 'eml' ? 'Generando…' : 'Abrir en Outlook Desktop'}</button>
+          <button className={`btn ${p?.graph ? '' : 'btn-primary'}`} type="button" onClick={eml} disabled={!!busy} title="Descarga el correo (.eml) con la tienda, la fecha y las fotos de cada punto; ábrelo en Outlook o compártelo">
+            <Icon n="download" />{busy === 'eml' ? 'Generando…' : 'Descargar correo (.eml)'}</button>
           {p?.graph && <button className="btn btn-primary" type="button" onClick={graph} disabled={!!busy}><Icon n="send" />{busy === 'graph' ? 'Creando borrador…' : 'Crear borrador en Outlook'}</button>}
         </div>}>
         {p && <>
-          <p className="dlg-note">Destinatarios sugeridos: generales{p.areas.length ? <> + áreas con hallazgos (<b>{p.areas.join(', ')}</b>)</> : ''}. Puedes ajustarlos; se separan con punto y coma. Se adjuntan el PDF, el XML de seguimiento y las fotos.</p>
+          <p className="dlg-note">Destinatarios sugeridos: generales{p.areas.length ? <> + áreas con hallazgos (<b>{p.areas.join(', ')}</b>)</> : ''}. Puedes ajustarlos; se separan con punto y coma. Las fotos van dentro del correo, debajo de cada pregunta; se adjuntan el PDF y el Excel de seguimiento. Al descargar el .eml puedes abrirlo en Outlook para enviarlo o compartir el archivo.</p>
           <div className="grid-2">
             <label className="field">Para<input value={to} onChange={e => setTo(e.target.value)} placeholder="correo@oxxo.com; …" /></label>
             <label className="field">CC<input value={cc} onChange={e => setCc(e.target.value)} /></label>

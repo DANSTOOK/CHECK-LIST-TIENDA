@@ -2,7 +2,9 @@
  * Correo de resultados.
  * Dos caminos (el usuario elige en la pantalla de resultado):
  *  1. Archivo .eml con "X-Unsent: 1": Outlook Desktop lo abre como correo NUEVO,
- *     con formato, PDF y fotos adjuntos, listo para enviar. No requiere permisos.
+ *     con formato, las fotos de evidencia DENTRO del cuerpo (debajo de cada
+ *     pregunta), el PDF y el Excel adjuntos, listo para enviar o compartir.
+ *     No requiere permisos.
  *     (Es el mismo mecanismo "Abrir en Outlook" del planificador de aperturas).
  *  2. Microsoft Graph: crea el BORRADOR directamente en el buzón del usuario
  *     (aparece en Borradores de Outlook Web y Desktop). Requiere Entra ID con el
@@ -17,10 +19,14 @@ const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;
 
 export const asunto = (ev: EvaluacionFull) => `Resultado Checklist Operativo - CR ${ev.tienda.cr} - ${ev.tienda.nombre}`;
 
+/** inlineId: la imagen va dentro del cuerpo (se referencia como cid:inlineId). */
 export interface Adjunto { nombre: string; mime: string; data: Buffer; inlineId?: string }
 
+/** Identificador de la foto dentro del correo. */
+export const cidFoto = (id: string) => `foto-${id}@ckl`;
+
 /** Cuerpo HTML con estilos en línea (Outlook ignora <style> en muchos casos). */
-export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | null } | null, appUrl?: string) {
+export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | null } | null, appUrl?: string, srcFoto?: (id: string) => string) {
   const p = ev.porcentaje;
   const color = p == null ? '#4b4943' : p >= 90 ? '#24603f' : p >= 75 ? '#8a5f06' : '#a8361f';
   const hallazgos = ev.respuestas.filter(r => r.resultado === 'no_cumple');
@@ -41,7 +47,7 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
     const fg = r.resultado === 'cumple' ? '#24603f' : r.resultado === 'no_cumple' ? '#a8361f' : '#85827a';
     return `<tr><td style="${td}color:#6d6a62;">${i + 1}</td><td style="${td}">${esc(r.texto)}<div style="color:#6d6a62;font-size:12px;">${esc(r.categoria)}</div></td>
       <td style="${td}">${r.calificacion ? `<span style="font-weight:600;font-size:12px;white-space:nowrap;">${res}</span>` : `<span style="background:${bg};color:${fg};padding:2px 8px;border-radius:5px;font-weight:600;font-size:12px;white-space:nowrap;">${res}</span>`}</td>
-      <td style="${td}">${esc(r.comentario || '')}</td><td style="${td}text-align:center;">${r.evidencias.length || ''}</td></tr>`;
+      <td style="${td}">${esc(r.comentario || '')}</td></tr>${srcFoto && r.evidencias.length ? `<tr><td style="padding:0 10px 10px;border-bottom:1px solid #e7e5df;"></td><td colspan="3" style="padding:0 10px 12px;border-bottom:1px solid #e7e5df;">${r.evidencias.filter(f => f.mime === 'image/jpeg' || f.mime === 'image/png').map((f, k) => `<img src="${srcFoto(f.id)}" width="180" alt="Evidencia ${i + 1}.${k + 1}" style="width:180px;max-width:100%;height:auto;border-radius:6px;border:1px solid #e7e5df;margin:6px 8px 0 0;vertical-align:top;">`).join('')}</td></tr>` : ''}`;
   }).join('');
   const kpi = (l: string, v: string | number, c = '#1c1b18') =>
     `<td style="padding:10px 14px;border-left:1px solid #e7e5df;"><div style="font-size:12px;color:#6d6a62;">${l}</div><div style="font-size:22px;font-weight:700;color:${c};">${v}</div></td>`;
@@ -50,8 +56,9 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
   <p style="font-size:14px;">Buen día,</p>
   <p style="font-size:14px;">Comparto el resultado del checklist operativo realizado en la tienda <b>${esc(ev.tienda.nombre)}</b> (CR <b>${esc(ev.tienda.cr)}</b>).</p>
   <table style="border-collapse:collapse;font-size:13px;margin:12px 0;">
-    <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Folio</td><td><b>${esc(ev.folio)}</b></td></tr>
-    <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Fecha</td><td>${esc(fmtDateTime(ev.fecha))}</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Tienda</td><td><b>${esc(ev.tienda.nombre)}</b> · CR ${esc(ev.tienda.cr)}</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Fecha del checklist</td><td><b>${esc(fmtDateTime(ev.fecha))}</b></td></tr>
+    <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Folio</td><td>${esc(ev.folio)}</td></tr>
     <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Responsable</td><td>${esc(ev.evaluador.nombre)}</td></tr>
     ${ev.tienda.ro ? `<tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">RO</td><td>${esc(ev.tienda.ro)}</td></tr>` : ''}
     <tr><td style="padding:3px 14px 3px 0;color:#6d6a62;">Plaza</td><td>${esc(ev.tienda.plaza || '—')}${ev.tienda.ciudad ? ' · ' + esc(ev.tienda.ciudad) : ''}</td></tr>
@@ -67,10 +74,10 @@ export function cuerpoHtml(ev: EvaluacionFull, anterior: { porcentaje: number | 
     `<li style="margin-bottom:4px;"><b>${esc(h.categoria)}${h.calificacion ? ` (${h.calificacion}/5)` : ''}:</b> ${esc(h.texto)}${h.comentario ? ` — <i>${esc(h.comentario)}</i>` : ''}</li>`).join('')}</ul>`
     : '<p style="font-size:13px;color:#24603f;margin:0;">Sin hallazgos. ¡Buen trabajo!</p>'}
   ${ev.observaciones ? `<h3 style="font-size:15px;margin:20px 0 6px;">Observaciones</h3><p style="font-size:13px;white-space:pre-wrap;margin:0;">${esc(ev.observaciones)}</p>` : ''}
-  <h3 style="font-size:15px;margin:20px 0 6px;">Detalle por pregunta</h3>
+  <h3 style="font-size:15px;margin:20px 0 6px;">Detalle por pregunta y evidencia fotográfica</h3>
   <table style="border-collapse:collapse;width:100%;"><tr style="background:#f1f0ec;">
-    <th style="${td}text-align:left;">#</th><th style="${td}text-align:left;">Pregunta</th><th style="${td}text-align:left;">Resultado</th><th style="${td}text-align:left;">Comentario</th><th style="${td}">Fotos</th></tr>${filas}</table>
-  <p style="font-size:12.5px;color:#6d6a62;margin-top:16px;">Se adjunta el reporte PDF, el XML de seguimiento (se abre en Excel) con ${fotosTotal} evidencia${fotosTotal === 1 ? '' : 's'} fotográfica${fotosTotal === 1 ? '' : 's'}${fotosTotal ? ' y las fotografías originales' : ''}.${appUrl ? ` Consulta el detalle en <a href="${esc(appUrl)}">${esc(appUrl)}</a>.` : ''}</p>
+    <th style="${td}text-align:left;">#</th><th style="${td}text-align:left;">Pregunta</th><th style="${td}text-align:left;">Resultado</th><th style="${td}text-align:left;">Comentario</th></tr>${filas}</table>
+  <p style="font-size:12.5px;color:#6d6a62;margin-top:16px;">Incluye ${fotosTotal} evidencia${fotosTotal === 1 ? '' : 's'} fotográfica${fotosTotal === 1 ? '' : 's'} en el detalle. Se adjuntan el reporte PDF y el Excel de seguimiento (cada punto con sus fotos).${appUrl ? ` Consulta el detalle en <a href="${esc(appUrl)}">${esc(appUrl)}</a>.` : ''}</p>
   <p style="font-size:14px;">Saludos.</p></div>`;
 }
 
@@ -79,26 +86,38 @@ const encWord = (s: string) => `=?UTF-8?B?${Buffer.from(s).toString('base64')}?=
 
 /** Construye un .eml (RFC 822) como borrador sin enviar, con adjuntos. */
 export function construirEml(o: { to: string[]; cc: string[]; subject: string; html: string; adjuntos: Adjunto[] }) {
-  const boundary = `----=_CKL_${Date.now().toString(36)}`;
+  const t = Date.now().toString(36);
+  const mixed = `----=_CKL_M_${t}`, related = `----=_CKL_R_${t}`;
+  const enLinea = o.adjuntos.filter(a => a.inlineId), archivos = o.adjuntos.filter(a => !a.inlineId);
   const parts = [
     `To: ${o.to.join(', ')}`,
     ...(o.cc.length ? [`Cc: ${o.cc.join(', ')}`] : []),
     `Subject: ${encWord(o.subject)}`,
+    `Date: ${new Date().toUTCString()}`,
     'X-Unsent: 1',
     'MIME-Version: 1.0',
-    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+    `Content-Type: multipart/mixed; boundary="${mixed}"`,
     '',
-    `--${boundary}`,
+    `--${mixed}`,
+    // Cuerpo HTML + fotos que se muestran dentro del correo (cid:)
+    `Content-Type: multipart/related; type="text/html"; boundary="${related}"`,
+    '',
+    `--${related}`,
     'Content-Type: text/html; charset=UTF-8',
     'Content-Transfer-Encoding: base64',
     '',
     b64(`<!doctype html><html><head><meta charset="utf-8"></head><body>${o.html}</body></html>`),
   ];
-  for (const a of o.adjuntos) {
-    parts.push(`--${boundary}`, `Content-Type: ${a.mime}; name="${encWord(a.nombre)}"`, 'Content-Transfer-Encoding: base64',
+  for (const a of enLinea) {
+    parts.push(`--${related}`, `Content-Type: ${a.mime}; name="${a.nombre}"`, 'Content-Transfer-Encoding: base64',
+      `Content-ID: <${a.inlineId}>`, `Content-Disposition: inline; filename="${a.nombre}"`, '', b64(a.data));
+  }
+  parts.push(`--${related}--`, '');
+  for (const a of archivos) {
+    parts.push(`--${mixed}`, `Content-Type: ${a.mime}; name="${encWord(a.nombre)}"`, 'Content-Transfer-Encoding: base64',
       `Content-Disposition: attachment; filename="${encWord(a.nombre)}"`, '', b64(a.data));
   }
-  parts.push(`--${boundary}--`, '');
+  parts.push(`--${mixed}--`, '');
   return parts.join('\r\n');
 }
 
@@ -122,7 +141,7 @@ export async function crearBorradorGraph(token: string, o: { to: string[]; cc: s
     if (a.data.length < 3 * 1024 * 1024) {
       const r = await fetch(`${G}/me/messages/${msg.id}/attachments`, {
         method: 'POST', headers: h,
-        body: JSON.stringify({ '@odata.type': '#microsoft.graph.fileAttachment', name: a.nombre, contentType: a.mime, contentBytes: a.data.toString('base64') }),
+        body: JSON.stringify({ '@odata.type': '#microsoft.graph.fileAttachment', name: a.nombre, contentType: a.mime, contentBytes: a.data.toString('base64'), ...(a.inlineId ? { isInline: true, contentId: a.inlineId } : {}) }),
       });
       if (!r.ok) throw new Error(`No se pudo adjuntar ${a.nombre} (${r.status})`);
     } else {
