@@ -4,7 +4,7 @@
  * aperturas (mismas clases CSS de base.css): íconos, diálogos, aviso flotante,
  * visor de imágenes y etiquetas de estatus.
  */
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { IS_DEMO } from '@/lib/base';
 import { ICONS } from './icons';
@@ -146,15 +146,46 @@ export function Empty({ icon = 'info', title, children }: { icon?: string; title
 }
 
 const STAR = 'M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z';
-/** Estrella SVG (rellena si on). */
-export function StarIcon({ on }: { on: boolean }) {
-  return <svg className={'star-ic' + (on ? ' is-on' : '')} viewBox="0 0 24 24" aria-hidden="true"><path d={STAR} /></svg>;
+// Paletas de la estrella: dorada (bien), naranja (hallazgo) y apagada.
+const TONOS = {
+  oro: ['#fff6c2', '#ffd84d', '#f6ac12', '#d17c00', '#a85f00'],
+  bajo: ['#ffe3c4', '#ffab5c', '#f37a2c', '#cf5414', '#9c3c0c'],
+  off: ['#ffffff', '#f3f1ec', '#e4e1d9', '#d3cfc5', '#bdb8ac'],
+};
+/**
+ * Estrella con relieve: degradado de metal dorado, reflejo de luz arriba a la
+ * izquierda, filo más oscuro y sombra (la sombra va en CSS).
+ */
+export function StarIcon({ on, tono = 'oro' }: { on: boolean; tono?: 'oro' | 'bajo' }) {
+  const id = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const c = TONOS[on ? tono : 'off'];
+  return (
+    <svg className={'star-ic' + (on ? ' is-on' : '') + (on && tono === 'bajo' ? ' is-low' : '')} viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <linearGradient id={'g' + id} x1="0.2" y1="0" x2="0.8" y2="1">
+          <stop offset="0" stopColor={c[0]} /><stop offset="0.32" stopColor={c[1]} /><stop offset="0.68" stopColor={c[2]} /><stop offset="1" stopColor={c[3]} />
+        </linearGradient>
+        <radialGradient id={'h' + id} cx="0.36" cy="0.28" r="0.5">
+          <stop offset="0" stopColor="#fff" stopOpacity={on ? 0.95 : 0.9} /><stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+        <clipPath id={'c' + id}><path d={STAR} /></clipPath>
+      </defs>
+      <path className="star-base" d={STAR} fill={'url(#g' + id + ')'} stroke={c[4]} strokeWidth="0.7" strokeLinejoin="round" />
+      <g clipPath={'url(#c' + id + ')'}>
+        {/* faceta inferior derecha más oscura: da volumen */}
+        <path d="M12 12 L21 9.6 L16.5 13.8 L17.6 19.9 L12 17 Z" fill={c[3]} opacity={on ? 0.35 : 0.18} />
+        {/* reflejo */}
+        <ellipse cx="9.2" cy="8.2" rx="6.4" ry="4.4" fill={'url(#h' + id + ')'} />
+        <path className="star-shine" d="M3 3 L8 3 L1 14 L-4 14 Z" fill="#fff" opacity="0" />
+      </g>
+    </svg>
+  );
 }
 /** Calificación de 1 a 5 estrellas en modo lectura. */
 export function Stars({ value, small = false }: { value: number | null | undefined; small?: boolean }) {
   return (
     <span className={'stars' + (small ? ' sm' : '')} role="img" aria-label={value ? value + ' de 5 estrellas' : 'Sin calificar'}>
-      {[1, 2, 3, 4, 5].map(n => <StarIcon key={n} on={(value ?? 0) >= n} />)}
+      {[1, 2, 3, 4, 5].map(n => <StarIcon key={n} on={(value ?? 0) >= n} tono={(value ?? 0) <= 3 ? 'bajo' : 'oro'} />)}
     </span>
   );
 }

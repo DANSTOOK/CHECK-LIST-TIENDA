@@ -68,6 +68,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
   const [paso, setPaso] = useState(() => { const i = ev.respuestas.findIndex(r => !r.resultado); return i < 0 ? ev.respuestas.length : i; });
   const [dir, setDir] = useState<'next' | 'prev'>('next');
   const [destello, setDestello] = useState<string | null>(null); // pregunta que recibió 5 estrellas
+  const [chispa, setChispa] = useState<{ id: string; n: number; k: number } | null>(null); // efecto en la estrella tocada
   const [exito, setExito] = useState<number | null | undefined>(undefined); // pantalla de éxito al finalizar
   const [pista, setPista] = useState(false); // pista de "desliza" la primera vez
   const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
@@ -127,6 +128,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
     vibrar();
     const resultado = resultadoDe(n);
     upd(r.id, { calificacion: n, resultado });
+    setChispa({ id: r.id, n, k: Date.now() });
     guardar({ respuestas: [{ id: r.id, calificacion: n }] });
     if (n === 5) { setDestello(r.id); setTimeout(() => setDestello(d => (d === r.id ? null : d)), 900); }
     despues(r, resultado, idx);
@@ -238,12 +240,18 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
             <h3>{r.texto}</h3>{r.ayuda && <p>{r.ayuda}</p>}
           </div>
         </div>
-        <div className={'rate' + (r.resultado === 'no_aplica' ? ' is-na' : '') + (destello === r.id ? ' is-burst' : '')}>
+        <div key={chispa && chispa.id === r.id ? 'r' + chispa.k : 'r'} className={'rate' + (r.resultado === 'no_aplica' ? ' is-na' : '') + (destello === r.id ? ' is-burst' : '') + (chispa && chispa.id === r.id ? ' is-rated' : '')}>
           <div className="rate-stars" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
             {ESTRELLAS.map(e => (
               <button key={e.n} type="button" role="radio" aria-checked={r.calificacion === e.n} aria-label={e.n + (e.n > 1 ? ' estrellas: ' : ' estrella: ') + e.label}
                 className={'rate-star' + ((r.calificacion ?? 0) >= e.n ? ' is-on' : '') + (r.calificacion != null && r.calificacion <= 3 ? ' is-low' : '')} onClick={() => calificar(r, e.n, idx)}>
-                <StarIcon on={(r.calificacion ?? 0) >= e.n} />
+                <StarIcon on={(r.calificacion ?? 0) >= e.n} tono={r.calificacion != null && r.calificacion <= 3 ? 'bajo' : 'oro'} />
+                {chispa && chispa.id === r.id && chispa.n === e.n && (
+                  <span key={chispa.k} className={'star-fx' + (e.n <= 3 ? ' is-low' : '')} aria-hidden="true">
+                    <i className="fx-ring" />
+                    {Array.from({ length: 10 }).map((_, k) => <i key={k} className="fx-spark" style={{ ['--a' as string]: k * 36 + 'deg', ['--d' as string]: (k % 2 ? 26 : 36) + 'px' }} />)}
+                  </span>
+                )}
               </button>
             ))}
           </div>

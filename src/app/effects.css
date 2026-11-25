@@ -65,14 +65,6 @@
 @keyframes blink { 50% { opacity: .2; } }
 
 /* ---------- Estrellas ---------- */
-/* Vista previa al pasar el dedo/ratón: se iluminan hasta la estrella señalada */
-@media (hover: hover) {
-  .rate-stars:has(.rate-star:nth-child(1):hover) .rate-star:nth-child(-n+1) path,
-  .rate-stars:has(.rate-star:nth-child(2):hover) .rate-star:nth-child(-n+2) path,
-  .rate-stars:has(.rate-star:nth-child(3):hover) .rate-star:nth-child(-n+3) path,
-  .rate-stars:has(.rate-star:nth-child(4):hover) .rate-star:nth-child(-n+4) path,
-  .rate-stars:has(.rate-star:nth-child(5):hover) .rate-star:nth-child(-n+5) path { fill: #f7cd63; stroke: #d99a0b; }
-}
 .rate-star .star-ic { transition: transform .2s var(--spring); }
 .rate-star:hover .star-ic { transform: scale(1.08) rotate(-4deg); }
 .rate-star.is-on .star-ic { animation: star-pop .35s var(--spring) backwards; }
@@ -166,3 +158,65 @@ a.tr:active { background: var(--surface-3); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+/* ==========================================================================
+   Estrellas realistas y efecto de selección
+   ========================================================================== */
+/* Quitar el relleno plano anterior: ahora el color lo da el degradado del SVG */
+.star-ic .star-base { transition: filter .2s; }
+.rate-star { position: relative; overflow: visible; }
+.rate-star .star-ic { filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .9)) drop-shadow(0 2px 2px rgba(60, 50, 30, .14)); transition: transform .25s var(--spring), filter .25s; }
+.rate-star .star-ic.is-on { filter: drop-shadow(0 3px 4px rgba(190, 120, 0, .38)) drop-shadow(0 0 10px rgba(255, 200, 60, .35)); }
+.rate-star .star-ic.is-low { filter: drop-shadow(0 3px 4px rgba(200, 80, 20, .35)) drop-shadow(0 0 10px rgba(255, 140, 60, .3)); }
+.stars .star-ic.is-on { filter: drop-shadow(0 1px 1px rgba(190, 120, 0, .35)); }
+
+/* Vista previa al señalar (desktop): brillo en vez de color plano */
+@media (hover: hover) {
+  .rate-stars:has(.rate-star:nth-child(1):hover) .rate-star:nth-child(-n+1) .star-ic,
+  .rate-stars:has(.rate-star:nth-child(2):hover) .rate-star:nth-child(-n+2) .star-ic,
+  .rate-stars:has(.rate-star:nth-child(3):hover) .rate-star:nth-child(-n+3) .star-ic,
+  .rate-stars:has(.rate-star:nth-child(4):hover) .rate-star:nth-child(-n+4) .star-ic,
+  .rate-stars:has(.rate-star:nth-child(5):hover) .rate-star:nth-child(-n+5) .star-ic { transform: translateY(-2px) scale(1.06); filter: drop-shadow(0 4px 6px rgba(190, 120, 0, .3)) brightness(1.04) sepia(.35) saturate(2.2) hue-rotate(-8deg); }
+}
+
+/* Ola de relleno con "aplastar y estirar" cada vez que se califica */
+.rate.is-rated .rate-star.is-on .star-ic { animation: star-squash .55s var(--spring) backwards; }
+.rate.is-rated .rate-star.is-on:nth-child(1) .star-ic { animation-delay: 0ms; }
+.rate.is-rated .rate-star.is-on:nth-child(2) .star-ic { animation-delay: 55ms; }
+.rate.is-rated .rate-star.is-on:nth-child(3) .star-ic { animation-delay: 110ms; }
+.rate.is-rated .rate-star.is-on:nth-child(4) .star-ic { animation-delay: 165ms; }
+.rate.is-rated .rate-star.is-on:nth-child(5) .star-ic { animation-delay: 220ms; }
+@keyframes star-squash {
+  0%   { transform: scale(.55) rotate(-25deg); }
+  45%  { transform: scale(1.28, 1.12) rotate(8deg); }
+  65%  { transform: scale(.94, 1.06) rotate(-3deg); }
+  82%  { transform: scale(1.04) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+/* Reflejo que recorre las estrellas encendidas después de calificar */
+.rate.is-rated .rate-star.is-on .star-shine { animation: star-glint .7s ease-out .35s; }
+.rate.is-rated .rate-star.is-on:nth-child(2) .star-shine { animation-delay: .4s; }
+.rate.is-rated .rate-star.is-on:nth-child(3) .star-shine { animation-delay: .45s; }
+.rate.is-rated .rate-star.is-on:nth-child(4) .star-shine { animation-delay: .5s; }
+.rate.is-rated .rate-star.is-on:nth-child(5) .star-shine { animation-delay: .55s; }
+@keyframes star-glint { 0% { opacity: .85; transform: translateX(0); } 100% { opacity: 0; transform: translateX(26px); } }
+/* Las estrellas apagadas "se hunden" un poco al quitarles el color */
+.rate.is-rated .rate-star:not(.is-on) .star-ic { animation: star-off .3s ease-out; }
+@keyframes star-off { 0% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+/* Efecto en la estrella tocada: onda y chispas que salen en círculo */
+.star-fx { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 2; }
+.fx-ring { position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 50%; border: 3px solid #ffcf3f; opacity: 0; animation: fx-ring .55s ease-out forwards; }
+.fx-spark { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: radial-gradient(circle, #fff 0 30%, #ffd84d 31% 100%); box-shadow: 0 0 6px 1px rgba(255, 200, 40, .8); opacity: 0; transform: rotate(var(--a)) translateY(0); animation: fx-spark .6s cubic-bezier(.15, .8, .3, 1) .05s forwards; }
+.fx-spark:nth-child(odd) { width: 4px; height: 4px; left: -2px; top: -2px; }
+.star-fx.is-low .fx-ring { border-color: #ff9a4a; }
+.star-fx.is-low .fx-spark { background: radial-gradient(circle, #fff 0 30%, #ff9a4a 31% 100%); box-shadow: 0 0 6px 1px rgba(255, 120, 40, .7); }
+@keyframes fx-ring { 0% { opacity: .9; transform: scale(.3); } 100% { opacity: 0; transform: scale(1.7); border-width: 1px; } }
+@keyframes fx-spark { 0% { opacity: 1; transform: rotate(var(--a)) translateY(0) scale(1); } 70% { opacity: 1; } 100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(.4); } }
+
+/* Etiqueta: entra con rebote y color */
+.rate.is-rated .rate-label { animation: label-pop .45s var(--spring); }
+@keyframes label-pop { 0% { opacity: 0; transform: translateY(6px) scale(.95); } 100% { opacity: 1; transform: none; } }
+/* Fondo del bloque de estrellas: se ilumina suavemente al calificar */
+.rate.is-rated { animation: rate-glow .8s ease-out; }
+@keyframes rate-glow { 0% { background: #fff8e1; } 100% { background: var(--surface-2); } }
