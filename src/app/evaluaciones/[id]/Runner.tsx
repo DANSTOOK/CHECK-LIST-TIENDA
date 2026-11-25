@@ -249,7 +249,7 @@ export default function Runner({ ev }: { ev: EvaluacionFull }) {
                 {chispa && chispa.id === r.id && chispa.n === e.n && (
                   <span key={chispa.k} className={'star-fx' + (e.n <= 3 ? ' is-low' : '')} aria-hidden="true">
                     <i className="fx-ring" />
-                    {Array.from({ length: 10 }).map((_, k) => <i key={k} className="fx-spark" style={{ ['--a' as string]: k * 36 + 'deg', ['--d' as string]: (k % 2 ? 26 : 36) + 'px' }} />)}
+                    {Array.from({ length: 10 }).map((_, k) => <i key={k} className="fx-spark" style={{ ['--a' as string]: k * 36 + 'deg', ['--k' as string]: k % 2 ? 0.7 : 1 }} />)}
                   </span>
                 )}
               </button>

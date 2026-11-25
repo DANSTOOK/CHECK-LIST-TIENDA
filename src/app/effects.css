@@ -212,7 +212,7 @@ a.tr:active { background: var(--surface-3); }
 .star-fx.is-low .fx-ring { border-color: #ff9a4a; }
 .star-fx.is-low .fx-spark { background: radial-gradient(circle, #fff 0 30%, #ff9a4a 31% 100%); box-shadow: 0 0 6px 1px rgba(255, 120, 40, .7); }
 @keyframes fx-ring { 0% { opacity: .9; transform: scale(.3); } 100% { opacity: 0; transform: scale(1.7); border-width: 1px; } }
-@keyframes fx-spark { 0% { opacity: 1; transform: rotate(var(--a)) translateY(0) scale(1); } 70% { opacity: 1; } 100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(.4); } }
+@keyframes fx-spark { 0% { opacity: 1; transform: rotate(var(--a)) translateY(0) scale(1); } 70% { opacity: 1; } 100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--d) * var(--k, 1) * -1)) scale(.4); } }
 
 /* Etiqueta: entra con rebote y color */
 .rate.is-rated .rate-label { animation: label-pop .45s var(--spring); }
@@ -220,3 +220,32 @@ a.tr:active { background: var(--surface-3); }
 /* Fondo del bloque de estrellas: se ilumina suavemente al calificar */
 .rate.is-rated { animation: rate-glow .8s ease-out; }
 @keyframes rate-glow { 0% { background: #fff8e1; } 100% { background: var(--surface-2); } }
+
+/* ---------- Estrellas al doble de tamaño ---------- */
+/* Escritorio/tableta: de 46 a 92 px. Celular: ocupan todo el ancho disponible. */
+.rate-stars { max-width: 560px; gap: 6px; justify-content: space-between; }
+.rate-star { max-width: 108px; padding: 4px; border-radius: 16px; }
+.rate-star .star-ic { max-width: 92px; max-height: 92px; }
+.rate-foot { margin-top: 2px; }
+.rate-label { font-size: 15px; }
+.fx-ring { left: -40px; top: -40px; width: 80px; height: 80px; border-width: 4px; }
+.fx-spark { width: 9px; height: 9px; left: -4.5px; top: -4.5px; }
+.fx-spark:nth-child(odd) { width: 6px; height: 6px; left: -3px; top: -3px; }
+.star-fx .fx-spark { --d: 52px; }
+@media (max-width: 860px) {
+  /* El bloque de estrellas usa el ancho de la tarjeta para que cada estrella sea lo más grande posible */
+  .q-big .rate { margin: 0 -6px; padding: 12px 6px 10px; }
+  .rate-stars { gap: 2px; max-width: none; }
+  .rate-star { max-width: none; padding: 1px; }
+  .rate-star .star-ic { max-width: none; max-height: none; }
+  .star-fx .fx-spark { --d: 40px; }
+  .fx-ring { left: -30px; top: -30px; width: 60px; height: 60px; }
+}
+@media (max-width: 860px) {
+  /* Durante la captura se aprovecha casi todo el ancho de la pantalla para las estrellas */
+  body.is-running .main { padding-left: 8px; padding-right: 8px; }
+  body.is-running .run-head { margin: 0 -8px; padding-left: 12px; padding-right: 12px; }
+  .q-big .rate { margin: 0 -14px; padding: 12px 4px 10px; border-radius: 0; border-left: 0; border-right: 0; }
+  .q-big .rate-foot { padding: 0 12px; }
+  .rate-stars { gap: 0; }
+}
